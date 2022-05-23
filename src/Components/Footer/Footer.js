@@ -23,10 +23,10 @@ function Footer(props) {
                             <p className="call_text"><a href="#">demo@gmail.com</a></p>
                             <div className="social_icon">
                                 <ul>
-                                    <li><a href="#"><img src="images/fb-icon.png" /></a></li>
-                                    <li><a href="#"><img src="images/twitter-icon.png" /></a></li>
-                                    <li><a href="#"><img src="images/linkedin-icon.png" /></a></li>
-                                    <li><a href="#"><img src="images/instagram-icon.png" /></a></li>
+                                    <li><a href="#"><img src="assets/images/fb-icon.png" /></a></li>
+                                    <li><a href="#"><img src="assets/images/twitter-icon.png" /></a></li>
+                                    <li><a href="#"><img src="assets/images/linkedin-icon.png" /></a></li>
+                                    <li><a href="#"><img src="assets/images/instagram-icon.png" /></a></li>
                                 </ul>
                             </div>
                         </div>
