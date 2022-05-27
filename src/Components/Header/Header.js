@@ -20,7 +20,7 @@ function Header(props) {
                     <div className="collapse navbar-collapse" id="navbarsExample01">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item active">
-                                {/* <NavLink className="nav-link" to="/">Home</NavLink> */}
+                                <NavLink className="nav-link" exact to={"/"}>Home</NavLink>
                             </li>
                             {/* <li className="nav-item">
                                 <a className="nav-link" href="category.html">Category</a>
