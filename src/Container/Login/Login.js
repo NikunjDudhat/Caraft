@@ -9,13 +9,13 @@ function Login(props) {
 
     let Login = {
         email: yup.string().email("please enter valid email").required("please enter email"),
-        password: yup.string().required("please enter Password")
+        password: yup.string().required("please enter Password"),
     }
 
     let SignUp = {
         name: yup.string().required("please Enter Name"),
         email: yup.string().email("please enter valid email").required("please enter email"),
-        password: yup.string().required("please enter Password")
+        password: yup.string().required("please enter Password"),
     }
 
     // let ForGotPassword = {
@@ -26,13 +26,13 @@ function Login(props) {
 
     // let schema = yup.object().shape();
 
-    if(userType === "Login"){
+    if (userType === "Login") {
         schema = yup.object().shape(Login);
         initiValue = {
             email: "",
             password: ""
         }
-    }else if(userType === "SignUp"){
+    } else if (userType === "SignUp") {
         schema = yup.object().shape(SignUp);
         initiValue = {
             name: '',
@@ -43,6 +43,7 @@ function Login(props) {
 
     const formik = useFormik({
         initialValues: initiValue,
+        validationSchema: schema,
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
 
@@ -87,8 +88,8 @@ function Login(props) {
                                                     onChange={formik.handleChange}
                                                 />
                                                 {
-                                                    formik.errors.email ? 
-                                                    <p>{formik.errors.email}</p> : null
+                                                    formik.errors.email ?
+                                                        <p>{formik.errors.email}</p> : null
                                                 }
                                             </FormGroup> : null
                                     }
@@ -107,8 +108,8 @@ function Login(props) {
                                                     onChange={formik.handleChange}
                                                 />
                                                 {
-                                                    formik.errors.email ? 
-                                                    <p>{formik.errors.email}</p> : null
+                                                    formik.errors.email ?
+                                                        <p>{formik.errors.email}</p> : null
                                                 }
                                             </FormGroup>
                                             <FormGroup className="form-group">
@@ -123,8 +124,8 @@ function Login(props) {
                                                     onChange={formik.handleChange}
                                                 />
                                                 {
-                                                    formik.errors.password ? 
-                                                    <p>{formik.errors.password}</p> : null
+                                                    formik.errors.password ?
+                                                        <p>{formik.errors.password}</p> : null
                                                 }
                                             </FormGroup>
                                         </>
