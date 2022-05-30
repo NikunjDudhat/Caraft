@@ -22,18 +22,25 @@ function Header(props) {
                             <li className="nav-item active">
                                 <NavLink className="nav-link" exact to={"/"}>Home</NavLink>
                             </li>
-                            {/* <li className="nav-item">
-                                <a className="nav-link" href="category.html">Category</a>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" exact to={"/Category"}>Category</NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="products.html">Products</a>
+                                {/* <a className="nav-link" href="products.html">Products</a> */}
+                                <NavLink className="nav-link" exact to={"/Products"}>Products</NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="clients.html">Client</a>
+                                {/* <a className="nav-link" href="clients.html">Client</a> */}
+                                <NavLink className="nav-link" exact to={"/Client"}>Client</NavLink>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="contact.html">Contact Us</a>
-                            </li> */}
+                            <NavLink className="nav-link" exact to={"/Contact"}>Contact Us</NavLink>
+                                {/* <a className="nav-link" href="contact.html">Contact Us</a> */}
+                            </li>
+                            <li className="nav-item">
+                            <NavLink className="nav-link" exact to={"/Login"}>Login</NavLink>
+                                {/* <a className="nav-link" href="contact.html">Contact Us</a> */}
+                            </li>
                         </ul>
                     </div>
                 </nav>

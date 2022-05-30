@@ -186,10 +186,10 @@ img {
     padding: 0;
 }
 
-.form-control:focus {
+/* .form-control:focus {
     border-color: #ffffff !important;
     box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25);
-}
+} */
 
 .navbar-form input {
     border: none !important;
@@ -893,7 +893,7 @@ button {
     font-weight: bold;
 }
 
-.form-control {
+/* .form-control {
     display: block;
     width: 100%;
     padding: .375rem 20px 0px 0px;
@@ -906,7 +906,7 @@ button {
     border: 0px;
     border-radius: 0px;
     transition: border-color 0s ease-in-out, box-shadow 0s ease-in-out !important;
-}
+} */
 
 .footer_section {
     width: 100%;
