@@ -18,9 +18,9 @@ function Login(props) {
         password: yup.string().required("please enter Password"),
     }
 
-    // let ForGotPassword = {
-    //     email: yup.string().email("please enter valid email").required("please enter email")
-    // }
+    let ForGotPassword = {
+        email: yup.string().email("please enter valid email").required("please enter email")
+    }
 
     let schema, initiValue;
 
@@ -39,21 +39,26 @@ function Login(props) {
             email: "",
             password: ""
         }
+    } else if (userType === "forgotPass") {
+        schema = yup.object().shape(ForGotPassword);
+        initiValue = {
+            email: ""
+        }
     }
 
     const formik = useFormik({
         initialValues: initiValue,
         validationSchema: schema,
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            // alert(JSON.stringify(values, null, 2));
 
-            // if(userType === "Login"){
-            //     console.log("Successfully Login 👍");
-            // }else if(userType === "SignUp"){
-            //     console.log("Successfully SignUp 👍");
-            // }else if(userType === "forgetPassowrd"){
-            //     console.log("Successfully Forget Passowrd 👍");
-            // }
+            if (userType === "Login") {
+                console.log("Successfully Login 👍");
+            } else if (userType === "SignUp") {
+                console.log("Successfully SignUp 👍");
+            } else if (userType === "forgotPass") {
+                console.log("Successfully Forget Passowrd 👍");
+            }
             // resetForm()
         },
     });
@@ -64,9 +69,11 @@ function Login(props) {
         <div className="contact_section layout_padding">
             <div className="container">
                 {
-                    userType === "Login" ?
-                        <h1 className="touch_taital">Login</h1> :
-                        <h1 className="touch_taital">Sign Up</h1>
+
+                    userType === "forgotPass" ? <h1 className="touch_taital">Forgot Password</h1> :
+                        userType === "Login" ?
+                            <h1 className="touch_taital">Login</h1> :
+                            <h1 className="touch_taital">Sign Up</h1>
                 }
                 <div className="contact_section_2">
                     <div className="row justify-content-center">
@@ -74,6 +81,25 @@ function Login(props) {
 
                             <Formik value={formik}>
                                 <Form onSubmit={formik.handleSubmit} className="email_text">
+                                    {
+                                        userType === "forgotPass" ? 
+                                        <FormGroup>
+                                                <Label for="exampleEmail">
+                                                    Email
+                                                </Label>
+                                                <Input
+                                                    id="exampleEmail"
+                                                    name="email"
+                                                    placeholder="with a placeholder"
+                                                    type="email"
+                                                    onChange={formik.handleChange}
+                                                />
+                                                {
+                                                    formik.errors.email ?
+                                                        <p>{formik.errors.email}</p> : null
+                                                }
+                                            </FormGroup> : null
+                                    }
                                     {
                                         userType === "SignUp" ?
                                             <FormGroup>
@@ -132,13 +158,14 @@ function Login(props) {
                                     }
                                     {
                                         userType === "Login" ?
-                                            <div className='d-flex justify-content-center'>
+                                            <div className='text-center'>
                                                 <Button type='submit' color="primary" className='mr-3'>Login</Button>
+                                                <p onClick={() => setUserType("forgotPass")}>Forgot Password</p>
                                                 <Button type='submit' color="primary" onClick={() => setUserType("SignUp")}>Sign Up</Button>
                                             </div>
                                             :
-                                            <div className='d-flex justify-content-center'>
-                                                <Button type='submit' color="primary" className='mr-3'>Sign Up</Button>
+                                            <div className='text-center'>
+                                                <Button type='submit' color="primary" className='mr-3'> {userType === "forgotPass" ? "Send OTP" : "Sign Up"}</Button>
                                                 <Button type='submit' color="primary" onClick={() => setUserType("Login")}>Login</Button>
                                             </div>
                                     }
