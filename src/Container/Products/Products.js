@@ -11,17 +11,17 @@ function Products(props) {
                         <div className="col-sm-5">
                             <div className="feature_box">
                                 <h1 className="readable_text">Readable content of</h1>
-                                <div><img src="images/img-7.png" className="image_7" /></div>
+                                <div><img src="assets/images/img-7.png" className="image_7" /></div>
                             </div>
                             <div className="feature_box_1">
                                 <h1 className="readable_text">Readable content of</h1>
-                                <div><img src="images/img-7.png" className="image_7" /></div>
+                                <div><img src="assets/images/img-7.png" className="image_7" /></div>
                             </div>
                         </div>
                         <div className="col-sm-7">
                             <div className="feature_box_2">
                                 <h1 className="readable_text">Readable content of</h1>
-                                <div><img src="images/img-8.png" className="image_8" /></div>
+                                <div><img src="assets/images/img-8.png" className="image_8" /></div>
                                 <div className="seemore_bt"><a href="#">see More</a></div>
                             </div>
                         </div>

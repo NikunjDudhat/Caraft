@@ -16,7 +16,7 @@ function Banner(props) {
                                     </div>
                                 </div>
                                 <div classname="col-md-6">
-                                    <div><img src="images/img-1.png" classname="image_1" /></div>
+                                    <div><img src="assets/images/img-1.png" classname="image_1" /></div>
                                 </div>
                             </div>
                             <div classname="button_main"><button classname="all_text">All</button><input type="text" classname="Enter_text" placeholder="Enter keywords" name /><button classname="search_text">Search</button></div>
@@ -33,7 +33,7 @@ function Banner(props) {
                                     </div>
                                 </div>
                                 <div classname="col-md-6">
-                                    <div><img src="images/img-1.png" classname="image_1" /></div>
+                                    <div><img src="assets/images/img-1.png" classname="image_1" /></div>
                                 </div>
                             </div>
                             <div classname="button_main"><button classname="all_text">All</button><input type="text" classname="Enter_text" placeholder="Enter keywords" name /><button classname="search_text">Search</button></div>
@@ -50,7 +50,7 @@ function Banner(props) {
                                     </div>
                                 </div>
                                 <div classname="col-md-6">
-                                    <div><img src="images/img-1.png" classname="image_1" /></div>
+                                    <div><img src="assets/images/img-1.png" classname="image_1" /></div>
                                 </div>
                             </div>
                             <div classname="button_main"><button classname="all_text">All</button><input type="text" classname="Enter_text" placeholder="Enter keywords" name /><button classname="search_text">Search</button></div>
@@ -58,10 +58,10 @@ function Banner(props) {
                     </div>
                 </div>
                 <a classname="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
-                    <i classname><img src="images/left-icon.png" /></i>
+                    <i classname><img src="assets/images/left-icon.png" /></i>
                 </a>
                 <a classname="carousel-control-next" href="#my_slider" role="button" data-slide="next">
-                    <i classname><img src="images/right-icon.png" /></i>
+                    <i classname><img src="assets/images/right-icon.png" /></i>
                 </a>
             </div>
         </div>

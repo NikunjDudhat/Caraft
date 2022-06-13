@@ -47,21 +47,21 @@ function Category(props) {
                     <div className="col-lg-4 col-sm-12">
                         <div className="beds_section active">
                             <h1 className="bed_text">Up to 50% off | Beds</h1>
-                            <div><img src="images/img-2.png" className="image_2" /></div>
+                            <div><img src="assets/images/img-2.png" className="image_2" /></div>
                             <div className="seemore_bt"><a href="#">see More</a></div>
                         </div>
                     </div>
                     <div className="col-lg-4 col-sm-12">
                         <div className="beds_section">
                             <h1 className="bed_text">organized in style</h1>
-                            <div><img src="images/img-3.png" className="image_2" /></div>
+                            <div><img src="assets/images/img-3.png" className="image_2" /></div>
                             <div className="seemore_bt"><a href="#">see More</a></div>
                         </div>
                     </div>
                     <div className="col-lg-4 col-sm-12">
                         <div className="beds_section">
                             <h1 className="bed_text">Refurbished mixer</h1>
-                            <div><img src="images/img-4.png" className="image_2" /></div>
+                            <div><img src="assets/images/img-4.png" className="image_2" /></div>
                             <div className="seemore_bt"><a href="#">see More</a></div>
                         </div>
                     </div>
