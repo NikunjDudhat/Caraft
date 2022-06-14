@@ -8,6 +8,7 @@ import Products from './Container/Products/Products';
 import Client from './Container/Client/Client';
 import Contact from './Container/Contact/Contact';
 import Login from './Container/Login/Login';
+import AddProduct from './Container/AddProduct/AddProduct';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path={"/Products"} component={Products} />
           <Route exact path={"/Client"} component={Client} />
           <Route exact path={"/Contact"} component={Contact} />
+          <Route exact path={"/AddProduct"} component={AddProduct} />
           <Route exact path={"/Login"} component={Login} />
         </Switch>
       <Footer/>

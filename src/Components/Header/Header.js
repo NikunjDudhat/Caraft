@@ -26,20 +26,19 @@ function Header(props) {
                                 <NavLink className="nav-link" exact to={"/Category"}>Category</NavLink>
                             </li>
                             <li className="nav-item">
-                                {/* <a className="nav-link" href="products.html">Products</a> */}
                                 <NavLink className="nav-link" exact to={"/Products"}>Products</NavLink>
                             </li>
                             <li className="nav-item">
-                                {/* <a className="nav-link" href="clients.html">Client</a> */}
                                 <NavLink className="nav-link" exact to={"/Client"}>Client</NavLink>
                             </li>
                             <li className="nav-item">
                             <NavLink className="nav-link" exact to={"/Contact"}>Contact Us</NavLink>
-                                {/* <a className="nav-link" href="contact.html">Contact Us</a> */}
+                            </li>
+                            <li className="nav-item">
+                            <NavLink className="nav-link" exact to={"/AddProduct"}>Add Product</NavLink>
                             </li>
                             <li className="nav-item">
                             <NavLink className="nav-link" exact to={"/Login"}>Login</NavLink>
-                                {/* <a className="nav-link" href="contact.html">Contact Us</a> */}
                             </li>
                         </ul>
                     </div>
