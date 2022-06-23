@@ -9,6 +9,7 @@ import Client from './Container/Client/Client';
 import Contact from './Container/Contact/Contact';
 import Login from './Container/Login/Login';
 import AddProduct from './Container/AddProduct/AddProduct';
+import ListProduct from './Container/AddProduct/ListProduct';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path={"/Client"} component={Client} />
           <Route exact path={"/Contact"} component={Contact} />
           <Route exact path={"/AddProduct"} component={AddProduct} />
+          <Route exact path={"/ListProduct"} component={ListProduct} />
           <Route exact path={"/Login"} component={Login} />
         </Switch>
       <Footer/>

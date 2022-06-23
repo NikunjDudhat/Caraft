@@ -1087,3 +1087,37 @@ button {
     padding: .5rem 0px;
 }
 
+.product_tab{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.product_tab .tab_item{
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    transition: all .3s;
+}
+.product_tab .tab_item::after{
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 3px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, rgba(75,51,222,1) 0%, rgba(186,69,236,1) 100%);
+    transition: all .3s;
+}
+.product_tab .tab_item:hover:after{
+    width: 100%;
+}
+
+.product_tab .tab_item.active{
+    color: #7139e3;
+}
+.product_tab .tab_item.active::after{
+    width: 100%;
+}
