@@ -1052,7 +1052,7 @@ button {
     font-size: 18px;
     color: #2a2a2c;
     margin-bottom: 20px;
-    padding: 40px 15px 8px 15px;
+    padding: 10px 15px 8px 15px;
     border: 1px solid #909090;
     height: 120px;
 }
@@ -1062,7 +1062,7 @@ button {
     float: left;
 }
 
-.send_btn a {
+.send_btn .btn {
     width: 100%;
     float: left;
     text-align: center;
