@@ -420,14 +420,17 @@ button {
     background: #ffd35a;
     color: #fff;
 }
-
+.add_category{
+    display: block;
+    text-align: right;
+}
 .category_section {
     width: 100%;
     float: left;
     border: 2px solid #797979;
     border-radius: 60px;
     padding: 10px 0px 0px 0px;
-    margin-top: 90px;
+    margin-top: 20px;
 }
 
 .main {
