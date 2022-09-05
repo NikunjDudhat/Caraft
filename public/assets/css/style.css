@@ -420,10 +420,6 @@ button {
     background: #ffd35a;
     color: #fff;
 }
-.add_category{
-    display: block;
-    text-align: right;
-}
 .category_section {
     width: 100%;
     float: left;
@@ -575,7 +571,6 @@ button {
     color: #131313;
     font-size: 24px;
     font-weight: bold;
-    text-align: center;
     text-transform: uppercase;
 }
 
@@ -584,13 +579,19 @@ button {
     float: left;
     text-align: center;
     min-height: 280px;
-    padding-top: 40px;
 }
 
 .seemore_bt {
     width: 170px;
     margin: 0 auto;
     text-align: center;
+}
+
+.admin_cont{
+    padding-top: 56px !important;
+}
+.admin_cont .add_category{
+    padding: 20px 0 ;
 }
 
 .seemore_bt a {
@@ -602,7 +603,6 @@ button {
     background-color: transparent !important;
     padding: 9px;
     text-transform: uppercase;
-    margin-top: 50px;
 }
 
 .beauty_section {

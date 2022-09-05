@@ -10,15 +10,27 @@ import Contact from './Container/Contact/Contact';
 import Login from './Container/Login/Login';
 import AddProduct from './Container/AddProduct/AddProduct';
 import ListProduct from './Container/AddProduct/ListProduct';
+import Categ_admin from './admin_panel/Container/Categ_admin';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { countorStore } from './Redux/Store';
 
 function App() {
+
+  const {store, persistor} = countorStore();
+
+
   return (
     <>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
       <Header/>
       {/* <Home/> */}
         <Switch>
           <Route exact path={"/"} component={Home} />
           <Route exact path={"/Category"} component={Category} />
+          {/* <Route exact path={"/admin_Category"} component={Cate_admin} /> */}
+          <Route exact path={"/admin_Category"} component={Categ_admin} />
           <Route exact path={"/Products"} component={Products} />
           <Route exact path={"/Client"} component={Client} />
           <Route exact path={"/Contact"} component={Contact} />
@@ -27,6 +39,8 @@ function App() {
           <Route exact path={"/Login"} component={Login} />
         </Switch>
       <Footer/>
+      </PersistGate>
+      </Provider>
     </>
   );
 }

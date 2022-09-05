@@ -175,89 +175,31 @@ function Category(props) {
                 <div className="row">
                     <div className="col-lg-4 col-sm-12">
                         <div className="beds_section active">
-                            <h1 className="bed_text">Up to 50% off | Beds</h1>
                             <div><img src="assets/images/img-2.png" className="image_2" /></div>
+                            <h1 className="bed_text">Up to 50% off | Beds</h1>
+                            <p>Categorie : Mobile</p>
                             <div className="seemore_bt"><a href="#">see More</a></div>
                         </div>
                     </div>
                     <div className="col-lg-4 col-sm-12">
                         <div className="beds_section">
-                            <h1 className="bed_text">organized in style</h1>
                             <div><img src="assets/images/img-3.png" className="image_2" /></div>
+                            <h1 className="bed_text">organized in style</h1>
+                            <p>Categorie : Watche</p>
                             <div className="seemore_bt"><a href="#">see More</a></div>
                         </div>
                     </div>
                     <div className="col-lg-4 col-sm-12">
                         <div className="beds_section">
-                            <h1 className="bed_text">Refurbished mixer</h1>
                             <div><img src="assets/images/img-4.png" className="image_2" /></div>
+                            <h1 className="bed_text">Refurbished mixer</h1>
+                            <p>Categorie : Appliance</p>
                             <div className="seemore_bt"><a href="#">see More</a></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <Dialog open={open} onClose={handleClose}>
-                <Formik value={formik}>
-                    <Form key={formik} onSubmit={formik.handleSubmit}>
-                        <DialogTitle>Add Category</DialogTitle>
-                        <DialogContent>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                name='category_name'
-                                id="category_name"
-                                label="Category Name"
-                                type="text"
-                                value={formik.values.category_name}
-                                fullWidth
-                                variant="standard"
-                                onChange={formik.handleChange}
-                            />
-                            {
-                                formik.errors.category_name ?
-                                    <p className='error'>{formik.errors.category_name}</p> : null
-                            }
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="category_price"
-                                label="Category Price"
-                                name='category_price'
-                                type="text"
-                                value={formik.values.category_price}
-                                fullWidth
-                                variant="standard"
-                                onChange={formik.handleChange}
-                            />
-                            {
-                                formik.errors.category_price ?
-                                    <p className='error'>{formik.errors.category_price}</p> : null
-                            }
-                            <input
-                                autoFocus
-                                margin="dense"
-                                id="uploadFile"
-                                label="Upload File"
-                                name='url'
-                                type="file"
-                                fullWidth
-                                variant="standard"
-                                onChange={e => formik.setFieldValue('url', e.target.files[0])}
-                            />
-                            {
-                                formik.errors.url ?
-                                    <p className='error'>{formik.errors.url}</p> : null
-                            }
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleClose}>Cancel</Button>
-                            <Button type='submit'>Add</Button>
-                        </DialogActions>
-                    </Form>
-                </Formik>
-            </Dialog>
         </>
     );
 }

@@ -3,7 +3,6 @@ import { addDoc, collection, getDocs, updateDoc, doc, deleteDoc  } from 'firebas
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { deleteDoctorData, getDoctorData, postDoctorData, updateDoctorData } from '../../common/apis/doctor.api'
 import storage, { db } from '../../Firebase'
-import { BASE_URL } from '../../shared/baseURL'
 import * as ActionTypes from '../ActionType'
 
 
