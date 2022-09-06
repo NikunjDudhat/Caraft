@@ -10,7 +10,7 @@ export const getdoctor = () => async (dispatch) => {
     try {
         dispatch(loadingMedicines())
 
-        const querySnapshot = await getDocs(collection(db, "Doctor"));
+        const querySnapshot = await getDocs(collection(db, "Category"));
         let dataD = [];
         querySnapshot.forEach((doc) => {
             dataD.push({id: doc.id, ...doc.data()})
@@ -48,23 +48,27 @@ export const getdoctor = () => async (dispatch) => {
 }
 
 export const postdoctor = (data) => async (dispatch) => {
-    console.log(data);
     try {
         dispatch(loadingMedicines())
 
         const randomName = Math.floor(Math.random() * 10000000000).toString();
-
-        const storageRef = ref(storage, "Doctor/"+ randomName);
+        const storageRef = ref(storage, "Category/"+ randomName);
 
         uploadBytes(storageRef, data.url).then((snapshot) => {
             getDownloadURL(snapshot.ref)
                 .then(async (url) => {
-                    console.log(url);
-                    const docRef = await addDoc(collection(db, "Doctor"), {
-                        email: data.email,
-                        name: data.name,
-                        post: data.post,
-                        salary: data.salary,
+                    // const docRef = await addDoc(collection(db, "Category"), {
+                    //     category_name: data.category_name,
+                    //     category_price: data.category_price,
+                    //     category_list: data.category_list,
+                    //     url: url,
+                    //     fileName: randomName,
+                    // });
+
+                    const docRef = await addDoc(collection(db, "Category"), {
+                        category_name: data.category_name,
+                        category_price: data.category_price,
+                        // category_list: data.category_list,
                         url: url,
                         fileName: randomName,
                     });
@@ -72,10 +76,9 @@ export const postdoctor = (data) => async (dispatch) => {
 
                     dispatch({type : ActionTypes.POST_DOCTOR, payload : {
                         id:docRef.id,
-                        email: data.email,
-                        name: data.name,
-                        post: data.post,
-                        salary: data.salary,
+                        category_name: data.category_name,
+                        category_price: data.category_price,
+                        // category_list: data.category_list,
                         url: url,
                         fileName: randomName,
                     }})
@@ -98,10 +101,10 @@ export const deleteDoctor = (data) => async (dispatch) => {
     console.log(data);
     try {
         dispatch(loadingMedicines())
-        const desertRef = ref(storage, 'Doctor/'+ data.fileName);
+        const desertRef = ref(storage, 'Category/'+ data.fileName);
 
         deleteObject(desertRef).then(async () => {
-            await deleteDoc(doc(db, "Doctor", data.id));
+            await deleteDoc(doc(db, "Category", data.id));
             dispatch({type : ActionTypes.DELETE_DOCTOR, payload : data.id})
         }).catch((error) => {
             dispatch(errorMedicines(error.message))
@@ -121,13 +124,12 @@ export const updataDoctor = (data) => async (dispatch) => {
     console.log(data);
     try {
         dispatch(loadingMedicines())
-        const updataRef = doc(db, "Doctor", data.id);
+        const updataRef = doc(db, "Category", data.id);
         if(typeof data.url === "string") {
             await updateDoc(updataRef, {
-                email: data.email,
-                name: data.name,
-                post: data.post,
-                salary: data.salary,
+                category_name: data.category_name,
+                category_price: data.category_price,
+                // category_list: data.category_list,
                 fileName: data.fileName,
                 url: data.url,
             });
@@ -136,21 +138,20 @@ export const updataDoctor = (data) => async (dispatch) => {
             console.log("data with img");
             console.log(data);
 
-            const newStorageRef = ref(storage, "Doctor/"+ data.fileName);
+            const newStorageRef = ref(storage, "Category/"+ data.fileName);
             deleteObject(newStorageRef).then(async () => {
 
                 const randomName = Math.floor(Math.random() * 10000000000).toString();
-                const ImgNewRef = ref(storage, "Doctor/"+ randomName);
+                const ImgNewRef = ref(storage, "Category/"+ randomName);
 
                 uploadBytes(ImgNewRef, data.url).then((snapshot) => {
                     getDownloadURL(snapshot.ref)
                         .then(async (url) => {
                             console.log(url);
                             await updateDoc(updataRef, {
-                                email: data.email,
-                                name: data.name,
-                                post: data.post,
-                                salary: data.salary,
+                                category_name: data.category_name,
+                                category_price: data.category_price,
+                                // category_list: data.category_list,
                                 url: url,
                                 fileName: randomName,
                             });

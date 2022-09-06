@@ -8,13 +8,23 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from 'reactstrap';
 import { Form, Formik, useFormik } from 'formik';
 import * as yup from 'yup';
-import { postdoctor } from '../../Redux/Action/doctor.action';
-import { useDispatch } from 'react-redux';
+import { deleteDoctor, getdoctor, postdoctor, updataDoctor } from '../../Redux/Action/doctor.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { FormControl, IconButton, InputLabel, MenuItem, Select } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { DataGrid } from '@mui/x-data-grid';
+import { useEffect } from 'react';
 
 function Categ_admin(props) {
     const [open, setOpen] = useState(false);
+    const [Dopen, setDOpen] = useState(false);
     const [udata, setUdata] = useState(false);
+    const [Did, setDid] = useState('');
+    // const [fileName, setfileName] = useState('');
     const dispatch = useDispatch();
+    const [showData, setEShowData] = useState([]);
+    const doctor = useSelector(state => state.doctor)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -24,10 +34,33 @@ function Categ_admin(props) {
         setOpen(false);
     };
 
+    const handleClickDOpen = (id) => {
+        setDid(id)
+        setDOpen(true);
+    };
+
+    const handleClickEOpen = (params) => {
+
+        setOpen(true);
+        console.log(params.row);
+        formik.setValues({
+            ...params.row,
+            url: params.row.url,
+        })
+
+        setDid(params.id);
+        setUdata(true);
+        // setfileName(params.row.fileName);
+        // console.log(id);
+        // EditData(id);
+        // setEditdata(id);
+    };
+
     let schema = yup.object().shape({
         category_name: yup.string().required("Please Enter Category Name"),
         category_price: yup.string().required("Please Enter Category Price"),
         url: yup.mixed().required("Please Upload Image"),
+        // category_list: yup.string().required("Please Select Category"),
     });
 
     const formik = useFormik({
@@ -35,6 +68,7 @@ function Categ_admin(props) {
             category_name: '',
             category_price: '',
             url: '',
+            // category_list: ''
         },
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
@@ -50,13 +84,15 @@ function Categ_admin(props) {
                 const {
                     category_name,
                     category_price,
-                    url
+                    url,
+                    // category_list
                 } = values;
                 let Emp_Data = {
                     id: Math.floor(Math.random() * 1000),
                     category_name,
                     category_price,
-                    url
+                    url,
+                    // category_list
                 }
                 // let employeeData = JSON.parse(localStorage.getItem('employee'));
 
@@ -80,14 +116,18 @@ function Categ_admin(props) {
         },
     });
 
-    const getEData = () => {
-        // const getEDataItem = JSON.parse(localStorage.getItem("employee"));
+    const handleDelete = () => {
 
-        // if (getEDataItem !== null) {
-        //     setEShowData(getEDataItem);
-        // }
-        // setEShowData(doctor.doctor);
+        // let getDataItem = JSON.parse(localStorage.getItem("employee"));
 
+        // let GFilter = getDataItem.filter((g, i) => g.id !== Did)
+
+        // localStorage.setItem("employee", JSON.stringify(GFilter))
+
+        dispatch(deleteDoctor(Did))
+        // toast.success("Data Deleted Successfully.")
+        setDOpen(false);
+        getEData();
     }
 
     const USetData = (values) => {
@@ -114,11 +154,56 @@ function Categ_admin(props) {
         //     ...values
         // }
 
-        // dispatch(updataDoctor(Udata));
-        // setOpen(false);
-        // getEData();     
+        dispatch(updataDoctor(values));
+        setOpen(false);
+        getEData();     
         // toast.success("Updata Successfully.")
     }
+
+    const getEData = () => {
+        // const getEDataItem = JSON.parse(localStorage.getItem("employee"));
+
+        // if (getEDataItem !== null) {
+        //     setEShowData(getEDataItem);
+        // }
+        setEShowData(doctor.doctor);
+
+    }
+
+    useEffect(() => {
+        dispatch(getdoctor())
+        getEData();
+    }, [])
+
+
+
+    let columns = [
+        { field: 'category_name', headerName: 'Category Name', width: 130 },
+        { field: 'category_price', headerName: 'Category Price', width: 130 },
+        // { field: 'category_list', headerName: 'Category Type', width: 130 },
+        { field: 'url', headerName: 'Image', width: 130,
+            renderCell: (params) => (
+                    <img src={params.row.url} style={{width: "50px",height: "50px", borderRadius: "50%", margin: "auto"}} />
+                )
+        },
+        {
+            field: 'action', headerName: 'Action', width: 130,
+            renderCell: (params) => {
+                return (
+                    <>
+                        <IconButton onClick={() => handleClickDOpen(params.row)} aria-label="delete">
+                            <DeleteIcon />
+                        </IconButton>
+
+                        <IconButton onClick={() => handleClickEOpen(params)} aria-label="Edit">
+                            <EditIcon />
+                        </IconButton>
+                    </>
+                )
+            }
+
+        },
+    ]
 
 
 
@@ -129,6 +214,15 @@ function Categ_admin(props) {
                     <Button onClick={handleClickOpen} variant="contained">Add Category</Button>
                 </div>
             </div>
+            <div style={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={doctor.doctor}
+                    columns={columns}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    // checkboxSelection
+                />
+            </div>  
             
         <Dialog open={open} onClose={handleClose}>
                 <Formik value={formik}>
@@ -167,6 +261,27 @@ function Categ_admin(props) {
                                 formik.errors.category_price ?
                                     <p className='error'>{formik.errors.category_price}</p> : null
                             }
+                            {/* <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Catagory Type</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={formik.values.category_list}
+                                    label="Age"
+                                    name="category_list"
+                                    onChange={formik.handleChange}
+                                >
+                                    <MenuItem value={"Mobiles"}>Mobiles</MenuItem>
+                                    <MenuItem value={"Fashion"}>Fashion</MenuItem>
+                                    <MenuItem value={"Watches"}>Watches</MenuItem>
+                                    <MenuItem value={"Appliances"}>Appliances</MenuItem>
+                                    <MenuItem value={"Electronics"}>Electronics</MenuItem>
+                                </Select>
+                            </FormControl>
+                            {
+                                formik.errors.category_list ?
+                                    <p className='error'>{formik.errors.category_list}</p> : null
+                            } */}
                             <input
                                 autoFocus
                                 margin="dense"
@@ -189,6 +304,21 @@ function Categ_admin(props) {
                         </DialogActions>
                     </Form>
                 </Formik>
+            </Dialog>
+
+            <Dialog
+                open={Dopen}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Are You Sure Delete Data !"}
+                </DialogTitle>
+                <DialogActions>
+                    <Button onClick={handleClose}>No</Button>
+                    <Button onClick={() => handleDelete()} autoFocus>Yes</Button>
+                </DialogActions>
             </Dialog>
         </div>
     );

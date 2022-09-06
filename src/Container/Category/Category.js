@@ -8,12 +8,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from 'reactstrap';
 import { Form, Formik, useFormik } from 'formik';
 import * as yup from 'yup';
+import { useSelector } from 'react-redux';
 
 
 
 function Category(props) {
     const [open, setOpen] = React.useState(false);
     const [udata, setUdata] = useState(false);
+    const doctor = useSelector(state => state.doctor)
+
+    console.log(doctor);
 
     const handleClickOpen = () => {
         setOpen(true);
