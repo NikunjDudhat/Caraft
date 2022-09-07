@@ -594,6 +594,12 @@ button {
     padding: 20px 0 ;
 }
 
+.box_main .icon_1{
+    height: 70px;
+    width: 50px;
+    overflow: hidden;
+}
+
 .seemore_bt a {
     width: 100%;
     float: left;

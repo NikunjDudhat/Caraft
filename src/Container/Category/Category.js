@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,15 +8,34 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from 'reactstrap';
 import { Form, Formik, useFormik } from 'formik';
 import * as yup from 'yup';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getdoctor } from '../../Redux/Action/doctor.action';
 
 
 
 function Category(props) {
     const [open, setOpen] = React.useState(false);
     const [udata, setUdata] = useState(false);
+    const dispatch = useDispatch();
+    const [showCategory, setShowCategory] = useState([]);
+    const [search, setSearch] = useState({
+        category: "All",
+        searchBar: ""
+      });
+
+      console.log(search);
+    
+      const handleCategory = (e) => {
+        setSearch({ ...search, category: e.target.id });
+      };
+    
+      const handleSearch = (e) => {
+        setSearch({ ...search, searchBar: e.target.value });
+      };
+    
     const doctor = useSelector(state => state.doctor)
 
+    console.log("showCategory", showCategory);
     console.log(doctor);
 
     const handleClickOpen = () => {
@@ -32,6 +51,10 @@ function Category(props) {
         category_price: yup.string().required("Please Enter Category Price"),
         url: yup.mixed().required("Please Upload Image"),
     });
+
+    useEffect(() => {
+        dispatch(getdoctor());
+    },[])
 
     const formik = useFormik({
         initialValues: {
@@ -88,7 +111,7 @@ function Category(props) {
         // if (getEDataItem !== null) {
         //     setEShowData(getEDataItem);
         // }
-        // setEShowData(doctor.doctor);
+        setShowCategory(doctor.doctor)
 
     }
 
@@ -135,40 +158,25 @@ function Category(props) {
                     <div className="col-lg-2 col-sm-12">
                         <h1 className="category_text">Category</h1>
                     </div>
+                    
                     <div className="col-lg-10 col-sm-12 main">
+                        {
+                            doctor.doctor.map((d) => {
+                                return (
+                                <div className="col">
+                                    <div className="box_main" onClick={(e) => handleCategory(e)} id={d.category_name}>
+                                        <div className="icon_1">
+                                            <img src={d.url} />
+                                        </div>
+                                        <h4 className="fashion_text active">{d.category_name}</h4>
+                                    </div>
+                                </div>
+                                )
+                            }) 
+                        }                        
                         <div className="col">
                             <div className="box_main">
                                 <div className="icon_1" />
-                                <h4 className="fashion_text active">Mobiles</h4>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="box_main">
-                                <div className="icon_2" />
-                                <h4 className="fashion_text">Fashion</h4>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="box_main">
-                                <div className="icon_3" />
-                                <h4 className="fashion_text">Watches</h4>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="box_main">
-                                <div className="icon_4" />
-                                <h4 className="fashion_text">Appliances</h4>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="box_main">
-                                <div className="icon_5" />
-                                <h4 className="fashion_text">Electronics</h4>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="box_main">
-                                <div className="icon_5" />
                                 <h4 className="fashion_text">All</h4>
                             </div>
                         </div>

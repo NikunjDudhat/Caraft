@@ -67,7 +67,7 @@ export const postdoctor = (data) => async (dispatch) => {
 
                     const docRef = await addDoc(collection(db, "Category"), {
                         category_name: data.category_name,
-                        category_price: data.category_price,
+                        // category_price: data.category_price,
                         // category_list: data.category_list,
                         url: url,
                         fileName: randomName,
@@ -77,7 +77,7 @@ export const postdoctor = (data) => async (dispatch) => {
                     dispatch({type : ActionTypes.POST_DOCTOR, payload : {
                         id:docRef.id,
                         category_name: data.category_name,
-                        category_price: data.category_price,
+                        // category_price: data.category_price,
                         // category_list: data.category_list,
                         url: url,
                         fileName: randomName,
@@ -128,7 +128,7 @@ export const updataDoctor = (data) => async (dispatch) => {
         if(typeof data.url === "string") {
             await updateDoc(updataRef, {
                 category_name: data.category_name,
-                category_price: data.category_price,
+                // category_price: data.category_price,
                 // category_list: data.category_list,
                 fileName: data.fileName,
                 url: data.url,
@@ -150,7 +150,7 @@ export const updataDoctor = (data) => async (dispatch) => {
                             console.log(url);
                             await updateDoc(updataRef, {
                                 category_name: data.category_name,
-                                category_price: data.category_price,
+                                // category_price: data.category_price,
                                 // category_list: data.category_list,
                                 url: url,
                                 fileName: randomName,

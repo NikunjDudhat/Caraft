@@ -30,6 +30,8 @@ function Categ_admin(props) {
         setOpen(true);
     };
 
+    console.log(doctor.doctor);
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -58,16 +60,16 @@ function Categ_admin(props) {
 
     let schema = yup.object().shape({
         category_name: yup.string().required("Please Enter Category Name"),
-        category_price: yup.string().required("Please Enter Category Price"),
         url: yup.mixed().required("Please Upload Image"),
+        // category_price: yup.string().required("Please Enter Category Price"),
         // category_list: yup.string().required("Please Select Category"),
     });
 
     const formik = useFormik({
         initialValues: {
             category_name: '',
-            category_price: '',
             url: '',
+            // category_price: '',
             // category_list: ''
         },
         validationSchema: schema,
@@ -83,15 +85,15 @@ function Categ_admin(props) {
                 console.log(values);
                 const {
                     category_name,
-                    category_price,
                     url,
+                    // category_price,
                     // category_list
                 } = values;
                 let Emp_Data = {
                     id: Math.floor(Math.random() * 1000),
                     category_name,
-                    category_price,
                     url,
+                    // category_price,
                     // category_list
                 }
                 // let employeeData = JSON.parse(localStorage.getItem('employee'));
@@ -179,7 +181,7 @@ function Categ_admin(props) {
 
     let columns = [
         { field: 'category_name', headerName: 'Category Name', width: 130 },
-        { field: 'category_price', headerName: 'Category Price', width: 130 },
+        // { field: 'category_price', headerName: 'Category Price', width: 130 },
         // { field: 'category_list', headerName: 'Category Type', width: 130 },
         { field: 'url', headerName: 'Image', width: 130,
             renderCell: (params) => (
@@ -245,7 +247,7 @@ function Categ_admin(props) {
                                 formik.errors.category_name ?
                                     <p className='error'>{formik.errors.category_name}</p> : null
                             }
-                            <TextField
+                            {/* <TextField
                                 autoFocus
                                 margin="dense"
                                 id="category_price"
@@ -260,7 +262,7 @@ function Categ_admin(props) {
                             {
                                 formik.errors.category_price ?
                                     <p className='error'>{formik.errors.category_price}</p> : null
-                            }
+                            } */}
                             {/* <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Catagory Type</InputLabel>
                                 <Select
