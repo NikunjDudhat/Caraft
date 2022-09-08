@@ -21,26 +21,18 @@ function Category(props) {
     const [search, setSearch] = useState({
         category: "All",
         searchBar: ""
-      });
+    });
 
-      console.log(search);
-    
-      const handleCategory = (e) => {
-        setSearch({ ...search, category: e.target.id });
-      };
-    
-      const handleSearch = (e) => {
+    const handleCategory = (e) => {
+        setSearch({ ...search, category: e });
+    };
+
+    const handleSearch = (e) => {
         setSearch({ ...search, searchBar: e.target.value });
-      };
-    
+    };
+
     const doctor = useSelector(state => state.doctor)
 
-    console.log("showCategory", showCategory);
-    console.log(doctor);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -54,7 +46,7 @@ function Category(props) {
 
     useEffect(() => {
         dispatch(getdoctor());
-    },[])
+    }, [])
 
     const formik = useFormik({
         initialValues: {
@@ -65,14 +57,11 @@ function Category(props) {
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
 
-            console.log(values);
-
-            if(udata){
+            if (udata) {
                 USetData(values);
                 resetForm();
 
             } else {
-                console.log(values);
                 const {
                     category_name,
                     category_price,
@@ -101,7 +90,7 @@ function Category(props) {
                 getEData();
                 // toast.success("Employee Data Successfully Add.")
                 resetForm();
-        }
+            }
         },
     });
 
@@ -149,69 +138,72 @@ function Category(props) {
 
     return (
         <>
-        <div className="container">
-            <div className='add_category'>
-                <button onClick={handleClickOpen}>Add Category</button>
-            </div>
-            <div className="category_section">
-                <div className="row">
-                    <div className="col-lg-2 col-sm-12">
-                        <h1 className="category_text">Category</h1>
-                    </div>
-                    
-                    <div className="col-lg-10 col-sm-12 main">
-                        {
-                            doctor.doctor.map((d) => {
-                                return (
-                                <div className="col">
-                                    <div className="box_main" onClick={(e) => handleCategory(e)} id={d.category_name}>
-                                        <div className="icon_1">
-                                            <img src={d.url} />
-                                        </div>
-                                        <h4 className="fashion_text active">{d.category_name}</h4>
+            <div className="container">
+                <div className="category_section">
+                    <div className="row">
+                        <div className="col-lg-2 col-sm-12">
+                            <h1 className="category_text">Category</h1>
+                        </div>
+
+                        <div className="col-lg-10 col-sm-12 main">
+                            <div className="col">
+                                <a href='#' onClick={(e) => handleCategory("All")}>
+                                    <div className="box_main">
+                                        <div className="icon_1" />
+                                        <h4 className="fashion_text">All</h4>
                                     </div>
-                                </div>
-                                )
-                            }) 
-                        }                        
-                        <div className="col">
-                            <div className="box_main">
-                                <div className="icon_1" />
-                                <h4 className="fashion_text">All</h4>
+                                </a>
+                            </div>
+                            {
+                                doctor.doctor.map((d) => {
+                                    return (
+
+                                        <div className="col">
+                                            <a href='#' onClick={(e) => handleCategory(d.category_name)}>
+                                            <div className="box_main">
+                                                <div className="icon_1">
+                                                    <img src={d.url} />
+                                                </div>
+                                                <h4 className="fashion_text active">{d.category_name}</h4>
+                                            </div>
+                                            </a>
+                                        </div>
+
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className="category_section_2">
+                    <div className="row">
+                        <div className="col-lg-4 col-sm-12">
+                            <div className="beds_section active">
+                                <div><img src="assets/images/img-2.png" className="image_2" /></div>
+                                <h1 className="bed_text">Up to 50% off | Beds</h1>
+                                <p>Categorie : Mobile</p>
+                                <div className="seemore_bt"><a href="#">see More</a></div>
+                            </div>
+                        </div>
+                        <div className="col-lg-4 col-sm-12">
+                            <div className="beds_section">
+                                <div><img src="assets/images/img-3.png" className="image_2" /></div>
+                                <h1 className="bed_text">organized in style</h1>
+                                <p>Categorie : Watche</p>
+                                <div className="seemore_bt"><a href="#">see More</a></div>
+                            </div>
+                        </div>
+                        <div className="col-lg-4 col-sm-12">
+                            <div className="beds_section">
+                                <div><img src="assets/images/img-4.png" className="image_2" /></div>
+                                <h1 className="bed_text">Refurbished mixer</h1>
+                                <p>Categorie : Appliance</p>
+                                <div className="seemore_bt"><a href="#">see More</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="category_section_2">
-                <div className="row">
-                    <div className="col-lg-4 col-sm-12">
-                        <div className="beds_section active">
-                            <div><img src="assets/images/img-2.png" className="image_2" /></div>
-                            <h1 className="bed_text">Up to 50% off | Beds</h1>
-                            <p>Categorie : Mobile</p>
-                            <div className="seemore_bt"><a href="#">see More</a></div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-sm-12">
-                        <div className="beds_section">
-                            <div><img src="assets/images/img-3.png" className="image_2" /></div>
-                            <h1 className="bed_text">organized in style</h1>
-                            <p>Categorie : Watche</p>
-                            <div className="seemore_bt"><a href="#">see More</a></div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4 col-sm-12">
-                        <div className="beds_section">
-                            <div><img src="assets/images/img-4.png" className="image_2" /></div>
-                            <h1 className="bed_text">Refurbished mixer</h1>
-                            <p>Categorie : Appliance</p>
-                            <div className="seemore_bt"><a href="#">see More</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         </>
     );
 }
