@@ -8,14 +8,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from 'reactstrap';
 import { Form, Formik, useFormik } from 'formik';
 import * as yup from 'yup';
-import { deleteDoctor, getdoctor, updataDoctor } from '../../Redux/Action/doctor.action';
+import { getdoctor } from '../../Redux/Action/doctor.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormControl, IconButton, InputLabel, MenuItem, Select } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { DataGrid } from '@mui/x-data-grid';
 import { useEffect } from 'react';
-import { getproduct, postproduct } from '../../Redux/Action/product.action';
+import { deleteproduct, getproduct, postproduct, updataproduct } from '../../Redux/Action/product.action';
 
 function Product_admin(props) {
     const [open, setOpen] = useState(false);
@@ -36,7 +36,8 @@ function Product_admin(props) {
 
     const handleClose = () => {
         setOpen(false);
-    };
+        formik.resetForm();
+        };
 
     const handleClickDOpen = (id) => {
         setDid(id)
@@ -130,7 +131,7 @@ function Product_admin(props) {
 
         // localStorage.setItem("employee", JSON.stringify(GFilter))
 
-        dispatch(deleteDoctor(Did))
+        dispatch(deleteproduct(Did))
         // toast.success("Data Deleted Successfully.")
         setDOpen(false);
         getEData();
@@ -160,7 +161,7 @@ function Product_admin(props) {
         //     ...values
         // }
 
-        dispatch(updataDoctor(values));
+        dispatch(updataproduct(values));
         setOpen(false);
         getEData();     
         // toast.success("Updata Successfully.")
@@ -279,11 +280,11 @@ function Product_admin(props) {
                                     name="product_list"
                                     onChange={formik.handleChange}
                                 >
-                                    {
-                                        doctor.doctor.map((d) => (
-                                            <MenuItem value={d.category_name}>{d.category_name}</MenuItem>
-                                        ))
-                                    }
+                                {
+                                    doctor.doctor.map((d) => (
+                                        <MenuItem value={d.category_name}>{d.category_name}</MenuItem>
+                                    ))
+                                }
                                 </Select>
                             </FormControl>
                             {

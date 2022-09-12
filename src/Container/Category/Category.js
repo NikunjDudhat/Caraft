@@ -10,6 +10,7 @@ import { Form, Formik, useFormik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { getdoctor } from '../../Redux/Action/doctor.action';
+import { getproduct } from '../../Redux/Action/product.action';
 
 
 
@@ -22,6 +23,9 @@ function Category(props) {
         category: "All",
         searchBar: ""
     });
+    const doctor = useSelector(state => state.doctor)
+    const products = useSelector(state => state.product);
+    const product = products.product; 
 
     const handleCategory = (e) => {
         setSearch({ ...search, category: e });
@@ -31,7 +35,27 @@ function Category(props) {
         setSearch({ ...search, searchBar: e.target.value });
     };
 
-    const doctor = useSelector(state => state.doctor)
+    const productFilter = () => {
+        const { category, searchBar } = search;
+
+        if (category === "All" || (searchBar && searchBar === "All")) {
+            console.log("product", product);
+          return product;
+        }
+    
+        const filtered = product.filter((productData) => {
+          if (
+            productData.category === category ||
+            (searchBar && searchBar === productData.category)
+          ) {
+            return productData;
+          }
+        });
+    
+        return filtered;
+    };
+
+    productFilter();
 
 
     const handleClose = () => {
@@ -46,6 +70,7 @@ function Category(props) {
 
     useEffect(() => {
         dispatch(getdoctor());
+        dispatch(getproduct());
     }, [])
 
     const formik = useFormik({
@@ -157,7 +182,6 @@ function Category(props) {
                             {
                                 doctor.doctor.map((d) => {
                                     return (
-
                                         <div className="col">
                                             <a href='#' onClick={(e) => handleCategory(d.category_name)}>
                                             <div className="box_main">
@@ -168,7 +192,6 @@ function Category(props) {
                                             </div>
                                             </a>
                                         </div>
-
                                     )
                                 })
                             }
@@ -177,6 +200,19 @@ function Category(props) {
                 </div>
                 <div className="category_section_2">
                     <div className="row">
+                        {
+                            product.map((productData) => (
+                                <div className="col-lg-4 col-sm-12">
+                                    <div className="beds_section active">
+                                        <div><img src={productData.url} className="image" /></div>
+                                        <h1 className="bed_text">{productData.product_name}</h1>
+                                        <p className="Categorie_type">Categorie : {productData.product_list}</p>
+                                        <p className="description">{productData.product_description}</p>
+                                        <div className="seemore_bt"><a href="#">see More</a></div>
+                                    </div>
+                                </div>
+                            ))
+                        }
                         <div className="col-lg-4 col-sm-12">
                             <div className="beds_section active">
                                 <div><img src="assets/images/img-2.png" className="image_2" /></div>

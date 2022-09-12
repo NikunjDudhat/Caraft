@@ -99,7 +99,7 @@ export const postproduct = (data) => async (dispatch) => {
     }
 }
 
-export const deleteDoctor = (data) => async (dispatch) => {
+export const deleteproduct = (data) => async (dispatch) => {
     console.log(data);
     try {
         dispatch(loadingMedicines())
@@ -122,7 +122,7 @@ export const deleteDoctor = (data) => async (dispatch) => {
     }
 }
 
-export const updataDoctor = (data) => async (dispatch) => {
+export const updataproduct = (data) => async (dispatch) => {
     console.log(data);
     try {
         dispatch(loadingMedicines())
