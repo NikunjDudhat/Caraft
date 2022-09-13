@@ -19,17 +19,22 @@ function Category(props) {
     const [udata, setUdata] = useState(false);
     const dispatch = useDispatch();
     const [showCategory, setShowCategory] = useState([]);
-    const [search, setSearch] = useState({
-        category: "All",
-        searchBar: ""
-    });
+    const [search, setSearch] = useState("All");
     const doctor = useSelector(state => state.doctor)
     const products = useSelector(state => state.product);
     const product = products.product; 
 
     const handleCategory = (e) => {
+        console.log(e, product);
+        let search = product.filter((p) => (
+            p.product_list.toString().includes(e)
+        ))
+        console.log(search);
+        // setFilter(fData);
         setSearch({ ...search, category: e });
     };
+
+    console.log(doctor.doctor);
 
     const handleSearch = (e) => {
         setSearch({ ...search, searchBar: e.target.value });
@@ -202,11 +207,11 @@ function Category(props) {
                     <div className="row">
                         {
                             product.map((productData) => (
-                                <div className="col-lg-4 col-sm-12">
+                                <div className="col-lg-4 col-sm-12" id={productData.product_list}>
                                     <div className="beds_section active">
                                         <div><img src={productData.url} className="image" /></div>
                                         <h1 className="bed_text">{productData.product_name}</h1>
-                                        <p className="Categorie_type">Categorie : {productData.product_list}</p>
+                                        <p className="Categorie_type">Price : {productData.product_price}</p>
                                         <p className="description">{productData.product_description}</p>
                                         <div className="seemore_bt"><a href="#">see More</a></div>
                                     </div>

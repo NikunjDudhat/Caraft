@@ -28,11 +28,11 @@ function Product_admin(props) {
     const doctor = useSelector(state => state.doctor);
     const product = useSelector(state => state.product);
 
+
+
     const handleClickOpen = () => {
         setOpen(true);
     };
-
-    console.log(doctor.doctor);
 
     const handleClose = () => {
         setOpen(false);
@@ -88,19 +88,19 @@ function Product_admin(props) {
 
             } else {
                 console.log(values);
-                const {
-                    category_name,
-                    url,
-                    // category_price,
-                    // category_list
-                } = values;
-                let Emp_Data = {
-                    id: Math.floor(Math.random() * 1000),
-                    category_name,
-                    url,
-                    // category_price,
-                    // category_list
-                }
+                // const {
+                //     category_name,
+                //     url,
+                //     // category_price,
+                //     // category_list
+                // } = values;
+                // let Emp_Data = {
+                //     id: Math.floor(Math.random() * 1000),
+                //     category_name,
+                //     url,
+                //     // category_price,
+                //     // category_list
+                // }
                 // let employeeData = JSON.parse(localStorage.getItem('employee'));
 
                 // if (employeeData == null) {
@@ -113,7 +113,7 @@ function Product_admin(props) {
                 // dispatch(postdoctor(Emp_Data))
                 dispatch(postproduct(values))
 
-                console.log(Emp_Data);
+                // console.log(Emp_Data);
                 setOpen(false);
 
                 getEData();
@@ -282,7 +282,7 @@ function Product_admin(props) {
                                 >
                                 {
                                     doctor.doctor.map((d) => (
-                                        <MenuItem value={d.category_name}>{d.category_name}</MenuItem>
+                                        <MenuItem value={d.category_name} id={d.id}>{d.category_name}</MenuItem>
                                     ))
                                 }
                                 </Select>
