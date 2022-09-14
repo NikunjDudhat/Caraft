@@ -28,6 +28,17 @@ function Product_admin(props) {
     const doctor = useSelector(state => state.doctor);
     const product = useSelector(state => state.product);
 
+    // const a = product.product.map((m) => m.id)
+    // console.log("product",product.product.map((m) => m.id));
+    // const doctorFilter = doctor.doctor;
+
+    // const FData = doctorFilter.filter((d) => {
+    //     if(d.id === a){
+    //         console.log();
+    //     }
+    // })
+    // console.log(FData);
+
 
 
     const handleClickOpen = () => {
@@ -88,32 +99,7 @@ function Product_admin(props) {
 
             } else {
                 console.log(values);
-                // const {
-                //     category_name,
-                //     url,
-                //     // category_price,
-                //     // category_list
-                // } = values;
-                // let Emp_Data = {
-                //     id: Math.floor(Math.random() * 1000),
-                //     category_name,
-                //     url,
-                //     // category_price,
-                //     // category_list
-                // }
-                // let employeeData = JSON.parse(localStorage.getItem('employee'));
-
-                // if (employeeData == null) {
-                //     localStorage.setItem('employee', JSON.stringify([Emp_Data]));
-                // } else {
-                //     employeeData.push(Emp_Data)
-                //     localStorage.setItem('employee', JSON.stringify(employeeData));
-                // }
-
-                // dispatch(postdoctor(Emp_Data))
                 dispatch(postproduct(values))
-
-                // console.log(Emp_Data);
                 setOpen(false);
 
                 getEData();
@@ -282,7 +268,7 @@ function Product_admin(props) {
                                 >
                                 {
                                     doctor.doctor.map((d) => (
-                                        <MenuItem value={d.category_name} id={d.id}>{d.category_name}</MenuItem>
+                                        <MenuItem value={d.id}>{d.category_name}</MenuItem>
                                     ))
                                 }
                                 </Select>

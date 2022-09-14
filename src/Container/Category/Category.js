@@ -24,9 +24,12 @@ function Category(props) {
     const products = useSelector(state => state.product);
     const product = products.product; 
 
+    console.log(product);
+
     const handleCategory = (e) => {
         console.log(e, product);
         let search = product.filter((p) => (
+            // if(e === )
             p.product_list.toString().includes(e)
         ))
         console.log(search);
@@ -36,31 +39,6 @@ function Category(props) {
 
     console.log(doctor.doctor);
 
-    const handleSearch = (e) => {
-        setSearch({ ...search, searchBar: e.target.value });
-    };
-
-    const productFilter = () => {
-        const { category, searchBar } = search;
-
-        if (category === "All" || (searchBar && searchBar === "All")) {
-            console.log("product", product);
-          return product;
-        }
-    
-        const filtered = product.filter((productData) => {
-          if (
-            productData.category === category ||
-            (searchBar && searchBar === productData.category)
-          ) {
-            return productData;
-          }
-        });
-    
-        return filtered;
-    };
-
-    productFilter();
 
 
     const handleClose = () => {
@@ -188,7 +166,7 @@ function Category(props) {
                                 doctor.doctor.map((d) => {
                                     return (
                                         <div className="col">
-                                            <a href='#' onClick={(e) => handleCategory(d.category_name)}>
+                                            <a href='#' onClick={(e) => handleCategory(d.id)}>
                                             <div className="box_main">
                                                 <div className="icon_1">
                                                     <img src={d.url} />
