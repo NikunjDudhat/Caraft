@@ -27,7 +27,13 @@ function Product_admin(props) {
     const [showData, setEShowData] = useState([]);
     const doctor = useSelector(state => state.doctor);
     const product = useSelector(state => state.product);
+    const categoryData = doctor.doctor;
 
+    // const cateID = () => {
+        
+    // }
+    // cateID();
+    // console.log(cateID);
     // const a = product.product.map((m) => m.id)
     // console.log("product",product.product.map((m) => m.id));
     // const doctorFilter = doctor.doctor;
@@ -174,7 +180,17 @@ function Product_admin(props) {
     let columns = [
         { field: 'product_name', headerName: 'Product Name', width: 130 },
         { field: 'product_price', headerName: 'Product Price', width: 130 },
-        { field: 'product_list', headerName: 'Product Type', width: 130 },
+        { field: 'product_list', headerName: 'Product Type', width: 130,
+            renderCell: (params) => (
+                categoryData.map((d) => {
+                        if(d.id === params.formattedValue){
+                            return <p>{d.category_name}</p>
+                        } else{
+                            console.log();
+                        }
+                })
+            )
+        },
         { field: 'product_description', headerName: 'Product Description', width: 130 },
         { field: 'url', headerName: 'Image', width: 130,
             renderCell: (params) => (
@@ -261,13 +277,12 @@ function Product_admin(props) {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={formik.values.category_list}
                                     label="Age"
                                     name="product_list"
                                     onChange={formik.handleChange}
                                 >
                                 {
-                                    doctor.doctor.map((d) => (
+                                    categoryData.map((d) => (
                                         <MenuItem value={d.id}>{d.category_name}</MenuItem>
                                     ))
                                 }
