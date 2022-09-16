@@ -19,23 +19,41 @@ function Category(props) {
     const [udata, setUdata] = useState(false);
     const dispatch = useDispatch();
     const [showCategory, setShowCategory] = useState([]);
-    const [search, setSearch] = useState("All");
     const doctor = useSelector(state => state.doctor)
     const products = useSelector(state => state.product);
     const product = products.product; 
+    const [filterProduct, setFilterProduct] = useState([]);
 
-    console.log(product);
+    console.log("product", product);
+
+    console.log("filterProduct", filterProduct);
 
     const handleCategory = (e) => {
-        console.log(e, product);
-        let search = product.filter((p) => (
-            // if(e === )
-            p.product_list.toString().includes(e)
-        ))
-        console.log(search);
+        console.log("id", e);
+        console.log("filterData",e, product);
+        let fData = [];
+
+
+        if(e === "All"){
+            fData.push(product);
+          }
+
+
+        product.filter((p) => {
+            if(e === p.product_list){
+                fData.push(p);
+              }
+            })
+            setFilterProduct(fData);
         // setFilter(fData);
-        setSearch({ ...search, category: e });
+        // setFilterProduct(search);
+
     };
+
+    // console.log("fData", fData.length);
+    const filterData = filterProduct.length > 0 ? filterProduct : product;
+
+    console.log("filterData",filterData);
 
     console.log(doctor.doctor);
 
@@ -184,7 +202,7 @@ function Category(props) {
                 <div className="category_section_2">
                     <div className="row">
                         {
-                            product.map((productData) => (
+                            filterData.map((productData) => (
                                 <div className="col-lg-4 col-sm-12" id={productData.product_list}>
                                     <div className="beds_section active">
                                         <div><img src={productData.url} className="image" /></div>

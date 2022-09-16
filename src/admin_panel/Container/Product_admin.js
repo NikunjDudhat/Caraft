@@ -184,9 +184,7 @@ function Product_admin(props) {
             renderCell: (params) => (
                 categoryData.map((d) => {
                         if(d.id === params.formattedValue){
-                            return <p>{d.category_name}</p>
-                        } else{
-                            console.log();
+                            return <div>{d.category_name}</div>
                         }
                 })
             )
