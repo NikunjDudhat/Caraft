@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { countorStore } from './Redux/Store';
 import Product_admin from './admin_panel/Container/Product_admin';
+import ProductDetails from './Container/ProductDetails/ProductDetails';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Switch>
           <Route exact path={"/"} component={Home} />
           <Route exact path={"/Category"} component={Category} />
+          <Route exact path={"/product-details"} component={ProductDetails} />
           {/* <Route exact path={"/admin_Category"} component={Cate_admin} /> */}
           <Route exact path={"/admin_Category"} component={Categ_admin} />
           <Route exact path={"/product_admin"} component={Product_admin} />

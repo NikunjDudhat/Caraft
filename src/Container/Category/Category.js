@@ -11,6 +11,7 @@ import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { getdoctor } from '../../Redux/Action/doctor.action';
 import { getproduct } from '../../Redux/Action/product.action';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
@@ -23,39 +24,26 @@ function Category(props) {
     const products = useSelector(state => state.product);
     const product = products.product; 
     const [filterProduct, setFilterProduct] = useState([]);
-
-    console.log("product", product);
+    const history = useHistory();
 
     console.log("filterProduct", filterProduct);
 
     const handleCategory = (e) => {
-        console.log("id", e);
-        console.log("filterData",e, product);
         let fData = [];
-
 
         if(e === "All"){
             fData.push(product);
           }
-
-
+          
         product.filter((p) => {
             if(e === p.product_list){
                 fData.push(p);
               }
             })
             setFilterProduct(fData);
-        // setFilter(fData);
-        // setFilterProduct(search);
-
     };
 
-    // console.log("fData", fData.length);
     const filterData = filterProduct.length > 0 ? filterProduct : product;
-
-    console.log("filterData",filterData);
-
-    console.log(doctor.doctor);
 
 
 
@@ -160,6 +148,10 @@ function Category(props) {
         // toast.success("Updata Successfully.")
     }
 
+    const handleProductDetails = (e) => {
+        history.push('/product-details',e)
+    }
+
 
 
     return (
@@ -173,7 +165,7 @@ function Category(props) {
 
                         <div className="col-lg-10 col-sm-12 main">
                             <div className="col">
-                                <a href='#' onClick={(e) => handleCategory("All")}>
+                                <a href='javascript:' onClick={(e) => handleCategory("All")}>
                                     <div className="box_main">
                                         <div className="icon_1" />
                                         <h4 className="fashion_text">All</h4>
@@ -184,13 +176,13 @@ function Category(props) {
                                 doctor.doctor.map((d) => {
                                     return (
                                         <div className="col">
-                                            <a href='#' onClick={(e) => handleCategory(d.id)}>
-                                            <div className="box_main">
-                                                <div className="icon_1">
-                                                    <img src={d.url} />
+                                            <a href='javascript:' onClick={(e) => handleCategory(d.id)}>
+                                                <div className="box_main">
+                                                    <div className="icon_1">
+                                                        <img src={d.url} />
+                                                    </div>
+                                                    <h4 className="fashion_text active">{d.category_name}</h4>
                                                 </div>
-                                                <h4 className="fashion_text active">{d.category_name}</h4>
-                                            </div>
                                             </a>
                                         </div>
                                     )
@@ -204,40 +196,18 @@ function Category(props) {
                         {
                             filterData.map((productData) => (
                                 <div className="col-lg-4 col-sm-12" id={productData.product_list}>
-                                    <div className="beds_section active">
-                                        <div><img src={productData.url} className="image" /></div>
-                                        <h1 className="bed_text">{productData.product_name}</h1>
-                                        <p className="Categorie_type">Price : {productData.product_price}</p>
-                                        <p className="description">{productData.product_description}</p>
-                                        <div className="seemore_bt"><a href="#">see More</a></div>
-                                    </div>
+                                    {/* <a href={`product-details/${productData.id}`}> */}
+                                    <a href={''} onClick={() => handleProductDetails(productData)}>
+                                        <div className="beds_section active">
+                                            <div><img src={productData.url} className="image" /></div>
+                                            <h1 className="bed_text">{productData.product_name}</h1>
+                                            <p className="Categorie_type">Price : {productData.product_price}</p>
+                                            <p className="description">{productData.product_description}</p>
+                                        </div>
+                                    </a>
                                 </div>
                             ))
                         }
-                        <div className="col-lg-4 col-sm-12">
-                            <div className="beds_section active">
-                                <div><img src="assets/images/img-2.png" className="image_2" /></div>
-                                <h1 className="bed_text">Up to 50% off | Beds</h1>
-                                <p>Categorie : Mobile</p>
-                                <div className="seemore_bt"><a href="#">see More</a></div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-sm-12">
-                            <div className="beds_section">
-                                <div><img src="assets/images/img-3.png" className="image_2" /></div>
-                                <h1 className="bed_text">organized in style</h1>
-                                <p>Categorie : Watche</p>
-                                <div className="seemore_bt"><a href="#">see More</a></div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-sm-12">
-                            <div className="beds_section">
-                                <div><img src="assets/images/img-4.png" className="image_2" /></div>
-                                <h1 className="bed_text">Refurbished mixer</h1>
-                                <p>Categorie : Appliance</p>
-                                <div className="seemore_bt"><a href="#">see More</a></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
