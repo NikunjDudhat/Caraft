@@ -15,3 +15,7 @@ export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
 
 export const LOADING_MEDICINES = "LOADING_MEDICINES"
 export const ERROR_MEDICINES = "ERROR_MEDICINES"
+
+
+export const ADD_CART = "ADD_CART"
+export const GET_CART = "GET_CART"

@@ -32,7 +32,7 @@ function Category(props) {
         let fData = [];
 
         if(e === "All"){
-            fData.push(product);
+            setFilterProduct([]);
           }
           
         product.filter((p) => {

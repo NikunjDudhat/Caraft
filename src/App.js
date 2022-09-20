@@ -1,5 +1,6 @@
 // import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import "./App.css"
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 import Home from './Container/Home/Home';
@@ -16,6 +17,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { countorStore } from './Redux/Store';
 import Product_admin from './admin_panel/Container/Product_admin';
 import ProductDetails from './Container/ProductDetails/ProductDetails';
+import CartDetails from './Container/CartDetails/ProductDetails';
 
 function App() {
 
@@ -41,6 +43,7 @@ function App() {
           <Route exact path={"/AddProduct"} component={AddProduct} />
           <Route exact path={"/ListProduct"} component={ListProduct} />
           <Route exact path={"/Login"} component={Login} />
+          <Route exact path={"/CartDetails"} component={CartDetails} />
         </Switch>
       <Footer/>
       </PersistGate>
