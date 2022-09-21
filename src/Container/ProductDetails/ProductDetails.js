@@ -14,10 +14,11 @@ function ProductDetails(props) {
 
     const hendleCart = (e) => {
         const CartData = {
-            e,quantity
+            id:e,
+            quantity:quantity
         }
         dispatch(AddcartAction(CartData))
-        history.push('/CartDetails')
+        history.push(`/CartDetails`)
     }
 
 

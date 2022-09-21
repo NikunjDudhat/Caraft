@@ -12,14 +12,14 @@ export const CartReducers = (state = initalState, action) => {
         case ActionTypes.ADD_CART : 
             return {
                 ...state,
-                isLoding : true,
+                isLoding : false,
+                cart : state.cart.concat(action.payload),
                 error : ''
             }
         case ActionTypes.GET_CART : 
             return {
                 ...state,
                 isLoding : false,
-                cart : state.cart.concat(action.payload),
                 error : ''
             }
         default : 

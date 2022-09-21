@@ -1,32 +1,45 @@
-import React, { useState } from 'react';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import BoltIcon from '@mui/icons-material/Bolt';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddcartAction } from '../../Redux/Action/cart.action';
+import { getproduct } from '../../Redux/Action/product.action';
 
 function CartDetails(props) {
 
-    // const ProductDetail = [props.location.state];
-    // const [quantity, setQuantity] = useState(1);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.product);
+    const cartProducts = useSelector(state => state.cart);
+    const productsData = products.product;
+    const cartProductsData = cartProducts.cart;
+    
+    const cartData = [];
+    productsData.map((p) => {
+        cartProductsData.map((c) => {
+            if(p.id === c.id){
+                cartData.push(p)
+            }
+        })
+    })
 
-    // const hendleCart = (e) => {
-    //     const CartData = {
-    //         e,quantity
-    //     }
-    //     dispatch(AddcartAction(CartData))
-        
-        
-    // }
+    console.log(cartData);
 
 
-
+    useEffect(() => {
+        dispatch(getproduct());
+    }, [])
 
 
     return (
 
-        <div>
-            Hello
+        <div className='product_details'>
+            <div className='container'>
+                <div className="row">
+                    <div className='col-lg-9'>
+                        <div className='cartBox'>
+                        </div>
+                    </div>
+                    <div className='col-lg-3'>Hello</div>
+                </div>
+            </div>
         </div>
 
         // <div className='product_details'>

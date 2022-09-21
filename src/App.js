@@ -17,7 +17,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { countorStore } from './Redux/Store';
 import Product_admin from './admin_panel/Container/Product_admin';
 import ProductDetails from './Container/ProductDetails/ProductDetails';
-import CartDetails from './Container/CartDetails/ProductDetails';
+import CartDetails from './Container/CartDetails/CartDetails';
 
 function App() {
 
