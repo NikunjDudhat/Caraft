@@ -8,6 +8,7 @@ const initalState = {
 
 
 export const CartReducers = (state = initalState, action) => {
+    console.log("action.payload", action.payload);
     switch (action.type) {
         case ActionTypes.ADD_CART : 
             return {

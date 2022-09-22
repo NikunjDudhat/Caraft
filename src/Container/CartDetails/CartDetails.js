@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddcartAction } from '../../Redux/Action/cart.action';
 import { getproduct } from '../../Redux/Action/product.action';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 function CartDetails(props) {
 
@@ -20,8 +21,6 @@ function CartDetails(props) {
         })
     })
 
-    console.log(cartData);
-
 
     useEffect(() => {
         dispatch(getproduct());
@@ -30,11 +29,39 @@ function CartDetails(props) {
 
     return (
 
-        <div className='product_details'>
+        <div className='product_details Cart_Details'>
             <div className='container'>
                 <div className="row">
                     <div className='col-lg-9'>
                         <div className='cartBox'>
+                            <h2>Add to Cart Items</h2>
+
+                            <div className='AddCartBox'>
+                                {
+                                    cartData.map((c) => (
+                                        <div className='CartProductDetails'>
+                                            <div className='productImg' style={{height: "112px", width: "112px", overflow: "hidden"}}>
+                                                <img src={c.url} width="100%" height="auto"  />
+                                            </div>
+                                            <div className='ProductItem'>
+                                                <h3>{c.product_name}</h3>
+                                                <p className='mb-3'>₹{c.product_price}</p>
+                                                <div className='items'>
+                                                    <button>-</button>
+                                                    <div className='input'>
+                                                        <input type="text" />
+                                                    </div>
+                                                    <button>+</button>
+                                                </div>
+                                            </div>
+                                            <div className='deleteItem'>REMOVE</div>
+                                        </div>
+                                    ))
+                                }
+                                <div className='addProduct'>
+                                    <button className='addItem'>Add Item</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className='col-lg-3'>Hello</div>
