@@ -8,7 +8,7 @@ const initalState = {
 
 
 export const CartReducers = (state = initalState, action) => {
-    console.log("action.payload", action.payload);
+    console.log("action.payload", action.payload, action.type);
     switch (action.type) {
         case ActionTypes.ADD_CART : 
             return {
@@ -21,6 +21,43 @@ export const CartReducers = (state = initalState, action) => {
             return {
                 ...state,
                 isLoding : false,
+                error : ''
+            }
+        case ActionTypes.DELETE_CART : 
+            return {
+                ...state,
+                isLoding : false,
+                cart : state.cart.filter((d, i ) => d.id !== action.payload),
+                error : ''
+            }
+        case ActionTypes.INCREMENT : 
+            return {
+                ...state,
+                isLoding : false,
+                cart : state.cart.map((c) => {
+                    if(c.id === action.payload){
+                        return { id: c.id,
+                            quantity: c.quantity + 1
+                        }
+                    } else{
+                        return c;
+                    }
+                }),
+                error : ''
+            }
+        case ActionTypes.DECREMENT : 
+            return {
+                ...state,
+                isLoding : false,
+                cart : state.cart.map((c) => {
+                    if(c.id === action.payload){
+                        return { id: c.id,
+                            quantity: c.quantity - 1
+                        }
+                    } else{
+                        return c;
+                    }
+                }),
                 error : ''
             }
         default : 

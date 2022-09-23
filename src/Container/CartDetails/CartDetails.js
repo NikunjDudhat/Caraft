@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddcartAction } from '../../Redux/Action/cart.action';
+import { AddcartAction, Decrement, DeletecartAction, Increment } from '../../Redux/Action/cart.action';
 import { getproduct } from '../../Redux/Action/product.action';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
@@ -16,16 +16,31 @@ function CartDetails(props) {
     productsData.map((p) => {
         cartProductsData.map((c) => {
             if(p.id === c.id){
-                cartData.push(p)
+                let Data = {
+                    ...p,
+                    quantity : c.quantity
+            }
+                cartData.push(Data)
             }
         })
     })
+
+    const handleIncrement = (id) => {
+        dispatch(Increment(id))
+    }
+
+    const handleDecrement = (id) => {
+        dispatch(Decrement(id))
+    }
 
 
     useEffect(() => {
         dispatch(getproduct());
     }, [])
 
+    const handleDelete = (id) => {
+        dispatch(DeletecartAction(id));
+    }
 
     return (
 
@@ -45,16 +60,16 @@ function CartDetails(props) {
                                             </div>
                                             <div className='ProductItem'>
                                                 <h3>{c.product_name}</h3>
-                                                <p className='mb-3'>₹{c.product_price}</p>
+                                                <p className='mb-3'>₹{c.product_price * c.quantity}</p>
                                                 <div className='items'>
-                                                    <button>-</button>
+                                                    <button disabled={c.quantity === 1 && true} onClick={() => handleDecrement(c.id)}>-</button>
                                                     <div className='input'>
-                                                        <input type="text" />
+                                                        <input type="text" value={c.quantity} />
                                                     </div>
-                                                    <button>+</button>
+                                                    <button onClick={() => handleIncrement(c.id)}>+</button>
                                                 </div>
                                             </div>
-                                            <div className='deleteItem'>REMOVE</div>
+                                            <div className='deleteItem' onClick={() => handleDelete(c.id)}>REMOVE</div>
                                         </div>
                                     ))
                                 }
