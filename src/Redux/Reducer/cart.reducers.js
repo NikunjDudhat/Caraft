@@ -8,13 +8,26 @@ const initalState = {
 
 
 export const CartReducers = (state = initalState, action) => {
-    console.log("action.payload", action.payload, action.type);
+    console.log("action.payload", action.payload, action.type, state);
     switch (action.type) {
         case ActionTypes.ADD_CART : 
             return {
                 ...state,
                 isLoding : false,
-                cart : state.cart.concat(action.payload),
+                cart: state.cart.concat(action.payload),
+                // cart : state.cart.map((c) => {
+                //     console.log("c.id", c.id);
+                //     if(c.id !== action.payload){
+                //         console.log("Good");
+                //         state.cart.concat(action.payload);
+                        
+                //     } else{
+                //         console.log("Error");
+                //         return { id: c.id,
+                //             quantity: c.quantity + 1
+                //         }
+                //     }
+                // }),
                 error : ''
             }
         case ActionTypes.GET_CART : 
