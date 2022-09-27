@@ -15,11 +15,11 @@ export const CartReducers = (state = initalState, action) => {
                 ...state,
                 isLoding : false,
                 cart: state.cart.concat(action.payload),
-                // cart : state.cart.map((c) => {
+                // cart : state.cart.map((c,i) => {
                 //     console.log("c.id", c.id);
-                //     if(c.id !== action.payload){
+                //     if(c.id === action.payload){
                 //         console.log("Good");
-                //         state.cart.concat(action.payload);
+                //         return state.cart.concat(action.payload);
                         
                 //     } else{
                 //         console.log("Error");

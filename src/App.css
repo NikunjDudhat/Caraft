@@ -88,13 +88,20 @@
   justify-content: center;
 }
 
+.cartBox{
+  background: white;
+  border: 1px solid #f0f0f0;
+}
+.cartBox h2{
+  border-bottom: 1px solid #f0f0f0;
+  padding: 20px 30px;
+}
 .Cart_Details .cartBox .AddCartBox{
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 20%);
-  border: 1px solid #f0f0f0;
 }
 
 .Cart_Details .AddCartBox .CartProductDetails:not(:last-child){
-  margin-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
 }
 .Cart_Details .AddCartBox .CartProductDetails{
   display: flex;
@@ -142,15 +149,13 @@
   vertical-align: middle;
   text-align: center;
 }
-.Cart_Details .AddCartBox .addProduct {
+.Cart_Details .addProduct {
   display: flex;
   justify-content: end;
-}
-.Cart_Details .AddCartBox .addProduct{
   padding: 16px 22px;
   box-shadow: 0 -2px 10px 0 rgb(0 0 0 / 10%);
 }
-.Cart_Details .AddCartBox .addProduct .addItem{
+.Cart_Details .addProduct .addItem{
   position: relative;
   background-color: #ff9f00;
   font-size: 14px;
@@ -172,13 +177,23 @@
   color: #763ae3;
 }
 
+.Price_Details{
+  background: white;
+  padding: 15px 20px;
+}
 .Price_Details .title{
   margin-bottom: 10px;
   border-bottom: 1px solid #e0e0e0;
 }
 
-.Price_Details .details p{
+.Price_Details .details p,
+.Price_Details .amount p{
   margin: 10px 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 400;
 }
 .Price_Details .details{
   border-bottom: 1px solid #e0e0e0;
@@ -193,9 +208,11 @@
 }
 .Price_Details .save{
   color: #388e3c;
+  font-weight: 400;
+  margin: 15px 0 0 !important;
 }
-.Price_Details .save{
-  margin: 15px 0 !important;
+.Cart_Details{
+  background: #f1f3f6;
 }
 
 
