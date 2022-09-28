@@ -12,6 +12,8 @@ function CartDetails(props) {
     const productsData = products.product;
     const cartProductsData = cartProducts.cart;
 
+    console.log("cartProducts", cartProducts);
+
     const cartData = [];
     let Total;
 

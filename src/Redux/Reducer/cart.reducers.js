@@ -17,15 +17,19 @@ export const CartReducers = (state = initalState, action) => {
                 cart: state.cart.concat(action.payload),
                 // cart : state.cart.map((c,i) => {
                 //     console.log("c.id", c.id);
-                //     if(c.id === action.payload){
-                //         console.log("Good");
+                //     if(c.length >= 0){
                 //         return state.cart.concat(action.payload);
+                //     } else if(c.id !== action.payload){
+                //         console.log("Good");
+                //         return state.cart.concat(action.payload);                      
                         
                 //     } else{
                 //         console.log("Error");
-                //         return { id: c.id,
-                //             quantity: c.quantity + 1
-                //         }
+                //         return state.cart.concat(action.payload);                      
+
+                //         // return { id: c.id,
+                //         //     quantity: c.quantity + 1
+                //         // }
                 //     }
                 // }),
                 error : ''
