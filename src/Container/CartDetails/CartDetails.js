@@ -12,14 +12,11 @@ function CartDetails(props) {
     const productsData = products.product;
     const cartProductsData = cartProducts.cart;
 
-    console.log("cartProducts", cartProducts);
-
     const cartData = [];
     let Total;
 
     productsData.map((p) => {
         cartProductsData.map((c) => {
-            console.log(c);
             if (p.id === c.id) {
                 let Data = {
                     ...p,
@@ -38,10 +35,6 @@ function CartDetails(props) {
 
     const Discount = Math.round(TotalAmount * 0.05);
     const FinalAmount = TotalAmount - Discount;
-
-    console.log(Total);
-
-    console.log("cartData", cartData);
 
     const handleIncrement = (id) => {
         dispatch(Increment(id))
@@ -92,7 +85,7 @@ function CartDetails(props) {
                                 }
                             </div>
                             <div className='addProduct'>
-                                <button className='addItem'>Add Item</button>
+                                <button className='addItem'>Place Order</button>
                             </div>
                         </div>
                     </div>
