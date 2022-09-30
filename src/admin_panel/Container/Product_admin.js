@@ -33,17 +33,13 @@ function Product_admin(props) {
         
     // }
     // cateID();
-    // console.log(cateID);
     // const a = product.product.map((m) => m.id)
-    // console.log("product",product.product.map((m) => m.id));
     // const doctorFilter = doctor.doctor;
 
     // const FData = doctorFilter.filter((d) => {
     //     if(d.id === a){
-    //         console.log();
     //     }
     // })
-    // console.log(FData);
 
 
 
@@ -64,7 +60,6 @@ function Product_admin(props) {
     const handleClickEOpen = (params) => {
 
         setOpen(true);
-        console.log(params.row);
         formik.setValues({
             ...params.row,
             url: params.row.url,
@@ -73,7 +68,6 @@ function Product_admin(props) {
         setDid(params.id);
         setUdata(true);
         // setfileName(params.row.fileName);
-        // console.log(id);
         // EditData(id);
         // setEditdata(id);
     };
@@ -96,15 +90,11 @@ function Product_admin(props) {
         },
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
-
-            console.log(values);
-
             if(udata){
                 USetData(values);
                 resetForm();
 
             } else {
-                console.log(values);
                 dispatch(postproduct(values))
                 setOpen(false);
 
@@ -130,10 +120,7 @@ function Product_admin(props) {
     }
 
     const USetData = (values) => {
-
-        // console.log(values);
         // let upData = JSON.parse(localStorage.getItem("employee"));
-        // console.log(upData);
 
         // let saveData = upData.map((u) => {
         //     if(u.id === Did){

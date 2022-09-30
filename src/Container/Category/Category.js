@@ -26,8 +26,6 @@ function Category(props) {
     const [filterProduct, setFilterProduct] = useState([]);
     const history = useHistory();
 
-    console.log("filterProduct", filterProduct);
-
     const handleCategory = (e) => {
         let fData = [];
 
@@ -97,8 +95,6 @@ function Category(props) {
 
                 // dispatch(postdoctor(Emp_Data))
                 // dispatch(postdoctor(values))
-
-                // console.log(Emp_Data);
                 setOpen(false);
 
                 getEData();
@@ -119,10 +115,7 @@ function Category(props) {
     }
 
     const USetData = (values) => {
-
-        // console.log(values);
         // let upData = JSON.parse(localStorage.getItem("employee"));
-        // console.log(upData);
 
         // let saveData = upData.map((u) => {
         //     if(u.id === Did){

@@ -30,8 +30,6 @@ function Categ_admin(props) {
         setOpen(true);
     };
 
-    console.log(doctor.doctor);
-
     const handleClose = () => {
         setOpen(false);
     };
@@ -44,7 +42,6 @@ function Categ_admin(props) {
     const handleClickEOpen = (params) => {
 
         setOpen(true);
-        console.log(params.row);
         formik.setValues({
             ...params.row,
             url: params.row.url,
@@ -53,7 +50,6 @@ function Categ_admin(props) {
         setDid(params.id);
         setUdata(true);
         // setfileName(params.row.fileName);
-        // console.log(id);
         // EditData(id);
         // setEditdata(id);
     };
@@ -75,14 +71,11 @@ function Categ_admin(props) {
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
 
-            console.log(values);
-
             if(udata){
                 USetData(values);
                 resetForm();
 
             } else {
-                console.log(values);
                 const {
                     category_name,
                     url,
@@ -107,8 +100,6 @@ function Categ_admin(props) {
 
                 // dispatch(postdoctor(Emp_Data))
                 dispatch(postdoctor(values))
-
-                console.log(Emp_Data);
                 setOpen(false);
 
                 getEData();
@@ -133,10 +124,7 @@ function Categ_admin(props) {
     }
 
     const USetData = (values) => {
-
-        // console.log(values);
         // let upData = JSON.parse(localStorage.getItem("employee"));
-        // console.log(upData);
 
         // let saveData = upData.map((u) => {
         //     if(u.id === Did){

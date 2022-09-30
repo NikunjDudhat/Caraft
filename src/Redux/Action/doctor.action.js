@@ -98,7 +98,6 @@ export const postdoctor = (data) => async (dispatch) => {
 }
 
 export const deleteDoctor = (data) => async (dispatch) => {
-    console.log(data);
     try {
         dispatch(loadingMedicines())
         const desertRef = ref(storage, 'Category/'+ data.fileName);
@@ -121,7 +120,6 @@ export const deleteDoctor = (data) => async (dispatch) => {
 }
 
 export const updataDoctor = (data) => async (dispatch) => {
-    console.log(data);
     try {
         dispatch(loadingMedicines())
         const updataRef = doc(db, "Category", data.id);
@@ -135,8 +133,6 @@ export const updataDoctor = (data) => async (dispatch) => {
             });
             dispatch({type : ActionTypes.UPDATE_DOCTOR, payload : data})
         } else {
-            console.log("data with img");
-            console.log(data);
 
             const newStorageRef = ref(storage, "Category/"+ data.fileName);
             deleteObject(newStorageRef).then(async () => {
@@ -147,7 +143,6 @@ export const updataDoctor = (data) => async (dispatch) => {
                 uploadBytes(ImgNewRef, data.url).then((snapshot) => {
                     getDownloadURL(snapshot.ref)
                         .then(async (url) => {
-                            console.log(url);
                             await updateDoc(updataRef, {
                                 category_name: data.category_name,
                                 // category_price: data.category_price,

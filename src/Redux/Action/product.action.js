@@ -100,7 +100,6 @@ export const postproduct = (data) => async (dispatch) => {
 }
 
 export const deleteproduct = (data) => async (dispatch) => {
-    console.log(data);
     try {
         dispatch(loadingMedicines())
         const desertRef = ref(storage, 'Product/'+ data.fileName);
@@ -123,7 +122,6 @@ export const deleteproduct = (data) => async (dispatch) => {
 }
 
 export const updataproduct = (data) => async (dispatch) => {
-    console.log(data);
     try {
         dispatch(loadingMedicines())
         const updataRef = doc(db, "Product", data.id);
@@ -138,9 +136,6 @@ export const updataproduct = (data) => async (dispatch) => {
             });
             dispatch({type : ActionTypes.UPDATE_PRODUCT, payload : data})
         } else {
-            console.log("data with img");
-            console.log(data);
-
             const newStorageRef = ref(storage, "Product/"+ data.fileName);
             deleteObject(newStorageRef).then(async () => {
 
@@ -150,7 +145,6 @@ export const updataproduct = (data) => async (dispatch) => {
                 uploadBytes(ImgNewRef, data.url).then((snapshot) => {
                     getDownloadURL(snapshot.ref)
                         .then(async (url) => {
-                            console.log(url);
                             await updateDoc(updataRef, {
                                 product_name: data.product_name,
                                 product_price: data.product_price,
