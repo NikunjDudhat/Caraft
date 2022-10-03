@@ -3,6 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AddcartAction, Decrement, DeletecartAction, Increment } from '../../Redux/Action/cart.action';
 import { getproduct } from '../../Redux/Action/product.action';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import * as yup from 'yup';
+import { Link } from 'react-router-dom';
+import { Button, Form } from 'reactstrap';
+import { Formik, useFormik } from 'formik';
+import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+
 
 function CartDetails(props) {
 
@@ -11,6 +17,30 @@ function CartDetails(props) {
     const cartProducts = useSelector(state => state.cart);
     const productsData = products.product;
     const cartProductsData = cartProducts.cart;
+    const [placeOrder, setPlaceOrder] = useState(false);
+
+    let schema = yup.object().shape({
+        email: yup.string().required("Please Enter Email"),
+        name: yup.string().required("Please Enter Name"),
+        phone: yup.string().required("Please Enter phone"),
+        address: yup.string().required("Please Enter addres"),
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            name: '',
+            phone: '',
+            address: '',
+        },
+        validationSchema: schema,
+        onSubmit: (values, { resetForm }) => {
+            console.log("valur", values);
+            // dispatch(postproduct(values));
+            resetForm();
+        },
+    });
+
 
     const cartData = [];
     let Total;
@@ -53,41 +83,123 @@ function CartDetails(props) {
         dispatch(DeletecartAction(id));
     }
 
+    const handelOrder = () => {
+        setPlaceOrder(true);
+        console.log("handelOrder", cartData);
+    }
+
     return (
 
         <div className='product_details Cart_Details'>
             <div className='container'>
                 <div className="row">
                     <div className='col-lg-9'>
-                        <div className='cartBox'>
-                            <h2>Add to Cart Items</h2>
-                            <div className='AddCartBox'>
-                                {
-                                    cartData.map((c) => (
-                                        <div className='CartProductDetails'>
-                                            <div className='productImg' style={{ height: "112px", width: "112px", overflow: "hidden" }}>
-                                                <img src={c.url} width="100%" height="auto" />
-                                            </div>
-                                            <div className='ProductItem'>
-                                                <h3>{c.product_name}</h3>
-                                                <p className='mb-3'>₹{c.product_price * c.quantity}</p>
-                                                <div className='items'>
-                                                    <button disabled={c.quantity === 1 && true} onClick={() => handleDecrement(c.id)}>-</button>
-                                                    <div className='input'>
-                                                        <input type="text" value={c.quantity} />
-                                                    </div>
-                                                    <button onClick={() => handleIncrement(c.id)}>+</button>
+                        { placeOrder ?
+                            <Formik value={formik}>
+                                <Form key={formik} onSubmit={formik.handleSubmit}>
+                                    <DialogTitle>Place Order</DialogTitle>
+                                    <DialogContent>
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            name='email'
+                                            id="email"
+                                            label="Email"
+                                            type="text"
+                                            value={formik.values.email}
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={formik.handleChange}
+                                        />
+                                        {
+                                            formik.errors.email ?
+                                                <p className='error'>{formik.errors.email}</p> : null
+                                        }
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="product_price"
+                                            label="Name"
+                                            name='name'
+                                            type="text"
+                                            value={formik.values.name}
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={formik.handleChange}
+                                        />
+                                        {
+                                            formik.errors.name ?
+                                                <p className='error'>{formik.errors.name}</p> : null
+                                        }
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="phone"
+                                            label="Phone"
+                                            name='phone'
+                                            type="text"
+                                            value={formik.values.phone}
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={formik.handleChange}
+                                        />
+                                        {
+                                            formik.errors.phone ?
+                                                <p className='error'>{formik.errors.phone}</p> : null
+                                        }
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="Address"
+                                            label="Address"
+                                            name='address'
+                                            type="text"
+                                            value={formik.values.address}
+                                            fullWidth
+                                            variant="standard"
+                                            onChange={formik.handleChange}
+                                        />
+                                        {
+                                            formik.errors.address ?
+                                                <p className='error'>{formik.errors.address}</p> : null
+                                        }
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button type='submit'>Submit</Button>
+                                    </DialogActions>
+                                </Form>
+                            </Formik> :
+                            <div className='cartBox'>
+                                <h2>Add to Cart Items</h2>
+                                <div className='AddCartBox'>
+                                    {
+                                        cartData.map((c) => (
+                                            <div className='CartProductDetails'>
+                                                <div className='productImg' style={{ height: "112px", width: "112px", overflow: "hidden" }}>
+                                                    <img src={c.url} width="100%" height="auto" />
                                                 </div>
+                                                <div className='ProductItem'>
+                                                    <h3>{c.product_name}</h3>
+                                                    <p className='mb-3'>₹{c.product_price * c.quantity}</p>
+                                                    <div className='items'>
+                                                        <button disabled={c.quantity === 1 && true} onClick={() => handleDecrement(c.id)}>-</button>
+                                                        <div className='input'>
+                                                            <input type="text" value={c.quantity} />
+                                                        </div>
+                                                        <button onClick={() => handleIncrement(c.id)}>+</button>
+                                                    </div>
+                                                </div>
+                                                <div className='deleteItem' onClick={() => handleDelete(c.id)}>REMOVE</div>
                                             </div>
-                                            <div className='deleteItem' onClick={() => handleDelete(c.id)}>REMOVE</div>
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                            <div className='addProduct'>
-                                <button className='addItem'>Place Order</button>
-                            </div>
-                        </div>
+                                        ))
+                                    }
+                                </div>
+                                <div className='addProduct'>
+                                    <Link to={"/Category"} className='addItem'>Add Item</Link>
+                                    <button className='addItem PlaceOrder' onClick={handelOrder}>Place Order</button>
+                                </div>
+                            </div> 
+                        }
                     </div>
                     <div className='col-lg-3'>
                         <div className='Price_Details'>

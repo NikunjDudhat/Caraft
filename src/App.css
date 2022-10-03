@@ -151,7 +151,7 @@
 }
 .Cart_Details .addProduct {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   padding: 16px 22px;
   box-shadow: 0 -2px 10px 0 rgb(0 0 0 / 10%);
 }
@@ -166,6 +166,10 @@
   align-items: center;
   justify-content: center;
 }
+.Cart_Details .addProduct .PlaceOrder{
+  background: #fb641b;
+}
+
 .Cart_Details .AddCartBox .CartProductDetails .deleteItem{
   font-size: 16px;
   color: #212121;
