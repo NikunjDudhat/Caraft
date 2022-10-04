@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { Button, Form } from 'reactstrap';
 import { Formik, useFormik } from 'formik';
 import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { postOrder } from '../../Redux/Action/order.action';
 
 
 function CartDetails(props) {
@@ -35,8 +36,16 @@ function CartDetails(props) {
         },
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
-            console.log("valur", values);
-            // dispatch(postproduct(values));
+            console.log("valur", values, cartData);
+
+            let data = {
+                userDetails : values,
+                cartDetails: cartData
+            }
+
+            console.log("data", data);
+
+            dispatch(postOrder(data));
             resetForm();
         },
     });
@@ -100,7 +109,7 @@ function CartDetails(props) {
                                     <DialogTitle>Place Order</DialogTitle>
                                     <DialogContent>
                                         <TextField
-                                            autoFocus
+                                            autoFocus={true}
                                             margin="dense"
                                             name='email'
                                             id="email"
@@ -116,7 +125,6 @@ function CartDetails(props) {
                                                 <p className='error'>{formik.errors.email}</p> : null
                                         }
                                         <TextField
-                                            autoFocus
                                             margin="dense"
                                             id="product_price"
                                             label="Name"
@@ -132,12 +140,11 @@ function CartDetails(props) {
                                                 <p className='error'>{formik.errors.name}</p> : null
                                         }
                                         <TextField
-                                            autoFocus
                                             margin="dense"
                                             id="phone"
                                             label="Phone"
                                             name='phone'
-                                            type="text"
+                                            type="number"
                                             value={formik.values.phone}
                                             fullWidth
                                             variant="standard"
@@ -148,7 +155,6 @@ function CartDetails(props) {
                                                 <p className='error'>{formik.errors.phone}</p> : null
                                         }
                                         <TextField
-                                            autoFocus
                                             margin="dense"
                                             id="Address"
                                             label="Address"
