@@ -15,7 +15,7 @@ export const getOrder = () => async (dispatch) => {
         querySnapshot.forEach((doc) => {
             dataD.push({id: doc.id, ...doc.data()})
         });
-        dispatch({type : ActionTypes.GET_DOCTOR, payload : dataD});
+        dispatch({type : ActionTypes.GET_ORDER, payload : dataD});
 
     } catch(error) {
         dispatch(errorMedicines(error.message))
