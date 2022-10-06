@@ -18,6 +18,7 @@ import { countorStore } from './Redux/Store';
 import Product_admin from './admin_panel/Container/Product_admin';
 import ProductDetails from './Container/ProductDetails/ProductDetails';
 import CartDetails from './Container/CartDetails/CartDetails';
+import OrderAdmin from './admin_panel/Container/Order_admin';
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
           <Route exact path={"/ListProduct"} component={ListProduct} />
           <Route exact path={"/Login"} component={Login} />
           <Route exact path={"/CartDetails"} component={CartDetails} />
+          <Route exact path={"/OrderDetails"} component={OrderAdmin} />
         </Switch>
       <Footer/>
       </PersistGate>

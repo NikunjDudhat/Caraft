@@ -7,6 +7,7 @@ import * as ActionTypes from '../ActionType'
 
 
 export const getOrder = () => async (dispatch) => {
+    console.log("getOrder");
     try {
         dispatch(loadingMedicines())
 
@@ -15,6 +16,8 @@ export const getOrder = () => async (dispatch) => {
         querySnapshot.forEach((doc) => {
             dataD.push({id: doc.id, ...doc.data()})
         });
+        console.log("querySnapshot", querySnapshot);
+        console.log("dataD", dataD);
         dispatch({type : ActionTypes.GET_ORDER, payload : dataD});
 
     } catch(error) {

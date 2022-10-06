@@ -39,8 +39,7 @@ function CartDetails(props) {
             console.log("valur", values, cartData);
 
             let data = {
-                userDetails : values,
-                cartDetails: cartData
+                values, cartData
             }
 
             console.log("data", data);
