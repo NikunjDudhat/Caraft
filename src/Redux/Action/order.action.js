@@ -28,6 +28,7 @@ export const getOrder = () => async (dispatch) => {
 export const postOrder = (data) => async (dispatch) => {
     try {
         dispatch(loadingMedicines())
+        
 
         const docRef = await addDoc(collection(db, "Order"), {
             Order: data.cartDetails,
