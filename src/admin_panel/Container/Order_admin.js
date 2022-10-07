@@ -21,7 +21,6 @@ function OrderAdmin(props) {
     const dispatch = useDispatch();
     const Order = useSelector(state => state.Order)
 
-    console.log(Order.order);
     useEffect(() => {
         dispatch(getOrder())
     }, [])
@@ -30,7 +29,7 @@ function OrderAdmin(props) {
         <div className="container">
             <div className='admin_cont'>
                 <div className='add_category'>
-                    <Button variant="contained">Add Category</Button>
+                    <Button variant="contained">Order List</Button>
                 </div>
             </div>
             <table class="table">
@@ -41,18 +40,45 @@ function OrderAdmin(props) {
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
                         <th scope="col">Address</th>
+                        <th scope="col" colSpan={4}>Order</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         Order.order.map((c, i) => (
+
                             <tr>
                                 <th scope="row">{i + 1}</th>
                                 <td>{c.User.name}</td>
                                 <td>{c.User.email}</td>
                                 <td>{c.User.phone}</td>
                                 <td>{c.User.address}</td>
+                                <td>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Product Quantity</th>
+                                            <th scope="col">Image</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            c.Order.map((d, i) => (
+                                                <tr>
+                                                    <td>{d.product_name}</td>
+                                                    <td>{d.quantity}</td>
+                                                    <td>
+                                                        <div style={{ "width": "50px", "height": "50px", "borderRadius": "50%", "overflow": "hidden" }}>
+                                                            <img src={d.url} width="100%" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </td>
                             </tr>
+
                         ))
                     }
                 </tbody>

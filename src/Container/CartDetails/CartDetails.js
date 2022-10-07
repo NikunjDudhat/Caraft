@@ -19,6 +19,8 @@ function CartDetails(props) {
     const productsData = products.product;
     const cartProductsData = cartProducts.cart;
     const [placeOrder, setPlaceOrder] = useState(false);
+    const cartData = [];
+    let Total;
 
     let schema = yup.object().shape({
         email: yup.string().required("Please Enter Email"),
@@ -45,13 +47,11 @@ function CartDetails(props) {
             console.log("data", data);
 
             dispatch(postOrder(data));
+            cartData=[];
             resetForm();
         },
     });
-
-
-    const cartData = [];
-    let Total;
+    console.log(cartData);
 
     productsData.map((p) => {
         cartProductsData.map((c) => {
