@@ -154,15 +154,6 @@ function Contact(props) {
                             </div>
                         </div>
                     </div>
-
-                    <div style={{ height: 400, width: '100%' }}>
-                        <DataGrid
-                            rows={UserData}
-                            columns={columns}
-                            pageSize={5}
-                            rowsPerPageOptions={[5]}
-                        />
-                    </div>
                 </div>
             </div>
         </div>

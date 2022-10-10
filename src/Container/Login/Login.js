@@ -96,7 +96,7 @@ function Login(props) {
                                                 />
                                                 {
                                                     formik.errors.email ?
-                                                        <p>{formik.errors.email}</p> : null
+                                                        <p className='error'>{formik.errors.email}</p> : null
                                                 }
                                             </FormGroup> : null
                                     }
@@ -115,7 +115,7 @@ function Login(props) {
                                                 />
                                                 {
                                                     formik.errors.email ?
-                                                        <p>{formik.errors.email}</p> : null
+                                                        <p className='error'>{formik.errors.email}</p> : null
                                                 }
                                             </FormGroup> : null
                                     }
@@ -135,7 +135,7 @@ function Login(props) {
                                                 />
                                                 {
                                                     formik.errors.email ?
-                                                        <p>{formik.errors.email}</p> : null
+                                                        <p className='error'>{formik.errors.email}</p> : null
                                                 }
                                             </FormGroup>
                                             <FormGroup className="form-group">
@@ -151,7 +151,7 @@ function Login(props) {
                                                 />
                                                 {
                                                     formik.errors.password ?
-                                                        <p>{formik.errors.password}</p> : null
+                                                        <p className='error'>{formik.errors.password}</p> : null
                                                 }
                                             </FormGroup>
                                         </>

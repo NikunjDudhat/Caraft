@@ -4,46 +4,12 @@ import Banner from '../Banner/Banner';
 function Home(props) {
   return (
     <div>
-      <div className="container">
-        <div className="category_section">
-          <div className="row">
-            <div className="col-lg-2 col-sm-12">
-              <h1 className="category_text">Category</h1>
-            </div>
-            <div className="col-lg-10 col-sm-12 main">
-              <div className="col">
-                <div className="box_main">
-                  <div className="icon_1" />
-                  <h4 className="fashion_text active">New Fashion</h4>
-                </div>
-              </div>
-              <div className="col">
-                <div className="box_main">
-                  <div className="icon_2" />
-                  <h4 className="fashion_text">Clothing</h4>
-                </div>
-              </div>
-              <div className="col">
-                <div className="box_main">
-                  <div className="icon_3" />
-                  <h4 className="fashion_text">Watches</h4>
-                </div>
-              </div>
-              <div className="col">
-                <div className="box_main">
-                  <div className="icon_4" />
-                  <h4 className="fashion_text">Accessories</h4>
-                </div>
-              </div>
-              <div className="col">
-                <div className="box_main">
-                  <div className="icon_5" />
-                  <h4 className="fashion_text">Sweaters &amp; Jackets</h4>
-                </div>
-              </div>
-            </div>
+       <div className="container-fluid p-0">
+          <div className='banner'>
+            <img src='assets/images/banner-slider.jpg' width="100%" />
           </div>
         </div>
+      <div className="container">
         <div className="category_section_2">
           <div className="row">
             <div className="col-lg-4 col-sm-12">

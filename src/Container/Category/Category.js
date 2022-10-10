@@ -188,14 +188,16 @@ function Category(props) {
                     <div className="row">
                         {
                             filterData.map((productData) => (
-                                <div className="col-lg-4 col-sm-12" id={productData.product_list}>
+                                <div className="col-lg-4 col-sm-12 pro_card" id={productData.product_list}>
                                     {/* <a href={`product-details/${productData.id}`}> */}
                                     <a href={''} onClick={() => handleProductDetails(productData)}>
                                         <div className="beds_section active">
-                                            <div><img src={productData.url} className="image" /></div>
-                                            <h1 className="bed_text">{productData.product_name}</h1>
-                                            <p className="Categorie_type">Price : {productData.product_price}</p>
-                                            <p className="description">{productData.product_description}</p>
+                                            <div className='Pro_img'><img src={productData.url} className="image" /></div>
+                                            <div className='card_details'>
+                                                <h1 className="bed_text">{productData.product_name}</h1>
+                                                <p className="Categorie_type">Price : {productData.product_price}</p>
+                                                <p className="description">{productData.product_description}</p>
+                                            </div>
                                         </div>
                                     </a>
                                 </div>

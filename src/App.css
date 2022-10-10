@@ -39,9 +39,22 @@
 
 .product_details{
   padding: 100px 0 50px;
+  color: black;
 }
+.product_details b{
+  color: black;
+}
+.product_details .title{
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
 .product_details .price{
   margin: 20px 0;
+  font-weight: 400;
+}
+.product_details .descrption{
+  font-weight: 400;
 }
 .product_details .price span,
 .product_details .descrption p{
@@ -52,6 +65,8 @@
 .product_details .price span,
 .product_details .descrption p{
   width: 20%;
+  display: inline-block;
+  min-width: 100px;
 }
 .product_details .addcart{
   display: flex;
@@ -86,6 +101,7 @@
   padding: 20px;
   display: flex;
   justify-content: center;
+  height: 360px;
 }
 
 .cartBox{

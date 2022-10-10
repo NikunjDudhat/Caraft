@@ -9,8 +9,6 @@ import Products from './Container/Products/Products';
 import Client from './Container/Client/Client';
 import Contact from './Container/Contact/Contact';
 import Login from './Container/Login/Login';
-import AddProduct from './Container/AddProduct/AddProduct';
-import ListProduct from './Container/AddProduct/ListProduct';
 import Categ_admin from './admin_panel/Container/Categ_admin';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -41,8 +39,6 @@ function App() {
           <Route exact path={"/Products"} component={Products} />
           <Route exact path={"/Client"} component={Client} />
           <Route exact path={"/Contact"} component={Contact} />
-          <Route exact path={"/AddProduct"} component={AddProduct} />
-          <Route exact path={"/ListProduct"} component={ListProduct} />
           <Route exact path={"/Login"} component={Login} />
           <Route exact path={"/CartDetails"} component={CartDetails} />
           <Route exact path={"/OrderDetails"} component={OrderAdmin} />

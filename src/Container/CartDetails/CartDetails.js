@@ -25,7 +25,7 @@ function CartDetails(props) {
     let schema = yup.object().shape({
         email: yup.string().required("Please Enter Email"),
         name: yup.string().required("Please Enter Name"),
-        phone: yup.string().required("Please Enter phone"),
+        phone: yup.string().required("Please Enter phone").max(10, 'maximum 10 number Enter '),
         address: yup.string().required("Please Enter addres"),
     });
 
