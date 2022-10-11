@@ -201,7 +201,6 @@ function Product_admin(props) {
         },
     ]
 
-
     return (
         <div className="container">
             <div className='admin_cont'>
