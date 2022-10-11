@@ -202,7 +202,6 @@ function Product_admin(props) {
     ]
 
 
-
     return (
         <div className="container">
             <div className='admin_cont'>
@@ -268,6 +267,7 @@ function Product_admin(props) {
                                 >
                                 {
                                     categoryData.map((d) => (
+                                        // <MenuItem value={d.id}>{d.category_name}</MenuItem>
                                         <MenuItem value={d.id}>{d.category_name}</MenuItem>
                                     ))
                                 }

@@ -4,7 +4,7 @@ import { AddcartAction, Decrement, DeletecartAction, Increment } from '../../Red
 import { getproduct } from '../../Redux/Action/product.action';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import * as yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, Form } from 'reactstrap';
 import { Formik, useFormik } from 'formik';
 import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
@@ -14,6 +14,7 @@ import { postOrder } from '../../Redux/Action/order.action';
 function CartDetails(props) {
 
     const dispatch = useDispatch();
+    let history = useHistory();
     const products = useSelector(state => state.product);
     const cartProducts = useSelector(state => state.cart);
     const productsData = products.product;
@@ -25,7 +26,7 @@ function CartDetails(props) {
     let schema = yup.object().shape({
         email: yup.string().required("Please Enter Email"),
         name: yup.string().required("Please Enter Name"),
-        phone: yup.string().required("Please Enter phone").max(10, 'maximum 10 number Enter '),
+        phone: yup.string().required("Please Enter phone").max(10, 'please enter maximum 10 numbers '),
         address: yup.string().required("Please Enter addres"),
     });
 
@@ -48,10 +49,11 @@ function CartDetails(props) {
 
             dispatch(postOrder(data));
             cartData=[];
+            history.push("/");
             resetForm();
+            
         },
     });
-    console.log(cartData);
 
     productsData.map((p) => {
         cartProductsData.map((c) => {
@@ -64,6 +66,8 @@ function CartDetails(props) {
             }
         })
     })
+
+    console.log("cartData", cartData);
 
     let TotalAmount = 0;
     cartData.map((c) => {

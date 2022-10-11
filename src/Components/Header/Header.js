@@ -1,7 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {NavLink} from "react-router-dom";
 
 function Header(props) {
+    const cartProducts = useSelector(state => state.cart);
+    const cartItem = cartProducts.cart.length;
+
     return (
         <div className="header_section">
             <div className="container">
@@ -30,7 +34,7 @@ function Header(props) {
                     <div className="search_section">
                         <ul>
                             <li><NavLink to={"/Login"}>Log In</NavLink></li>
-                            <li><NavLink to={"/CartDetails"}><img src="assets/images/shopping-bag.png" /></NavLink></li>
+                            <li><NavLink to={"/CartDetails"}><img src="assets/images/shopping-bag.png" /><sup className='cartItem'>{cartItem}</sup></NavLink></li>
                             <li><a href="#"><img src="assets/images/search-icon.png" /></a></li>
                         </ul>
                     </div>
