@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddcartAction, Decrement, DeletecartAction, Increment } from '../../Redux/Action/cart.action';
+import { AddcartAction, Decrement, DeletecartAction, EmptyAction, Increment } from '../../Redux/Action/cart.action';
 import { getproduct } from '../../Redux/Action/product.action';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import * as yup from 'yup';
@@ -25,7 +25,7 @@ function CartDetails(props) {
 
     let schema = yup.object().shape({
         email: yup.string().required("Please Enter Email"),
-        name: yup.string().required("Please Enter Name"),
+        name: yup.string().required("Please Enter Name").matches(/[abcdefghijklmnopqrstuvwxyz]+/ , 'Is not in correct format'),
         phone: yup.string().required("Please Enter phone").max(10, 'please enter maximum 10 numbers '),
         address: yup.string().required("Please Enter addres"),
     });
@@ -39,18 +39,14 @@ function CartDetails(props) {
         },
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
-            console.log("valur", values, cartData);
-
             let data = {
                 values, cartData
             }
 
-            console.log("data", data);
-
             dispatch(postOrder(data));
-            cartData=[];
             history.push("/");
             resetForm();
+            dispatch(EmptyAction());            
             
         },
     });

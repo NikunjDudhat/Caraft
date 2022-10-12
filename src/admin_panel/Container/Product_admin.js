@@ -28,9 +28,13 @@ function Product_admin(props) {
     const doctor = useSelector(state => state.doctor);
     const product = useSelector(state => state.product);
     const categoryData = doctor.doctor;
+    const [categoryID, setCategoryID] = useState('');
+    const [Edit, setEdit] = useState(false);
 
+
+    console.log("categoryID", categoryID);
     // const cateID = () => {
-        
+
     // }
     // cateID();
     // const a = product.product.map((m) => m.id)
@@ -50,7 +54,7 @@ function Product_admin(props) {
     const handleClose = () => {
         setOpen(false);
         formik.resetForm();
-        };
+    };
 
     const handleClickDOpen = (id) => {
         setDid(id)
@@ -67,6 +71,7 @@ function Product_admin(props) {
 
         setDid(params.id);
         setUdata(true);
+        setEdit(true);
         // setfileName(params.row.fileName);
         // EditData(id);
         // setEditdata(id);
@@ -90,7 +95,7 @@ function Product_admin(props) {
         },
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
-            if(udata){
+            if (udata) {
                 USetData(values);
                 resetForm();
 
@@ -101,59 +106,25 @@ function Product_admin(props) {
                 getEData();
                 // toast.success("Employee Data Successfully Add.")
                 resetForm();
-        }
+            }
         },
     });
 
     const handleDelete = () => {
-
-        // let getDataItem = JSON.parse(localStorage.getItem("employee"));
-
-        // let GFilter = getDataItem.filter((g, i) => g.id !== Did)
-
-        // localStorage.setItem("employee", JSON.stringify(GFilter))
-
         dispatch(deleteproduct(Did))
-        // toast.success("Data Deleted Successfully.")
         setDOpen(false);
         getEData();
     }
 
     const USetData = (values) => {
-        // let upData = JSON.parse(localStorage.getItem("employee"));
-
-        // let saveData = upData.map((u) => {
-        //     if(u.id === Did){
-        //         return(
-        //             values
-        //         )
-        //     }else{
-        //         return(
-        //             u
-        //         )
-        //     }
-
-        // })
-        // localStorage.setItem("employee", JSON.stringify(saveData));
-        // let Udata = {
-        //     fileName: fileName,
-        //     ...values
-        // }
 
         dispatch(updataproduct(values));
         setOpen(false);
-        getEData();     
-        // toast.success("Updata Successfully.")
+        getEData();
     }
 
     const getEData = () => {
-        // const getEDataItem = JSON.parse(localStorage.getItem("employee"));
-
-        // if (getEDataItem !== null) {
-        //     setEShowData(getEDataItem);
-        // }
         setEShowData(doctor.doctor);
-
     }
 
     useEffect(() => {
@@ -167,20 +138,25 @@ function Product_admin(props) {
     let columns = [
         { field: 'product_name', headerName: 'Product Name', width: 130 },
         { field: 'product_price', headerName: 'Product Price', width: 130 },
-        { field: 'product_list', headerName: 'Product Type', width: 130,
+        {
+            field: 'product_list', headerName: 'Product Type', width: 130,
             renderCell: (params) => (
+
                 categoryData.map((d) => {
-                        if(d.id === params.formattedValue){
-                            return <div>{d.category_name}</div>
-                        }
+                    // console.log("paramsssss", params.formattedValue);
+                    setCategoryID(params.formattedValue);
+                    if (d.id === params.formattedValue) {
+                        return <div>{d.category_name}</div>
+                    }
                 })
             )
         },
         { field: 'product_description', headerName: 'Product Description', width: 130 },
-        { field: 'url', headerName: 'Image', width: 130,
+        {
+            field: 'url', headerName: 'Image', width: 130,
             renderCell: (params) => (
-                    <img src={params.row.url} style={{width: "50px",height: "50px", borderRadius: "50%", margin: "auto"}} />
-                )
+                <img src={params.row.url} style={{ width: "50px", height: "50px", borderRadius: "50%", margin: "auto" }} />
+            )
         },
         {
             field: 'action', headerName: 'Action', width: 130,
@@ -214,11 +190,11 @@ function Product_admin(props) {
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
-                    // checkboxSelection
+                // checkboxSelection
                 />
-            </div>  
-            
-        <Dialog open={open} onClose={handleClose}>
+            </div>
+
+            <Dialog open={open} onClose={handleClose}>
                 <Formik value={formik}>
                     <Form key={formik} onSubmit={formik.handleSubmit}>
                         <DialogTitle>Add Category</DialogTitle>
@@ -242,7 +218,7 @@ function Product_admin(props) {
                             <TextField
                                 autoFocus
                                 margin="dense"
-                                id="product_price" 
+                                id="product_price"
                                 label="product Price"
                                 name='product_price'
                                 type="text"
@@ -264,9 +240,19 @@ function Product_admin(props) {
                                     name="product_list"
                                     onChange={formik.handleChange}
                                 >
-                                {
+                                    {/* {
+                                        categoryData.map((d) => {
+                                                if(Edit === true && d.id === categoryID){
+                                                    <MenuItem defaultValue={d.category_name}>{d.category_name}</MenuItem>
+                                                    console.log("Gooddddd", d.category_name);
+                                                } else{
+                                                    console.log("Error");
+                                                }
+                                        })
+                                    } */}
+
+                                    {
                                     categoryData.map((d) => (
-                                        // <MenuItem value={d.id}>{d.category_name}</MenuItem>
                                         <MenuItem value={d.id}>{d.category_name}</MenuItem>
                                     ))
                                 }
@@ -294,7 +280,7 @@ function Product_admin(props) {
                             <TextField
                                 autoFocus
                                 margin="dense"
-                                id="product_description" 
+                                id="product_description"
                                 label="product description"
                                 name='product_description'
                                 type="text"

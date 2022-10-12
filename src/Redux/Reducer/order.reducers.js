@@ -8,7 +8,6 @@ const initalState = {
 
 
 export const OrderReducers = (state = initalState, action) => {
-    console.log(action.payload, action.type);
     switch (action.type) {
         case ActionTypes.GET_ORDER : 
             return {

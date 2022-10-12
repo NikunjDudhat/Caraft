@@ -14,6 +14,10 @@ export const DeletecartAction = (data) => (dispatch) => {
     dispatch({ type: ActionTypes.DELETE_CART, payload: data })
 }
 
+export const EmptyAction = () => (dispatch) => {
+    dispatch({ type: ActionTypes.EMPTY_CART })
+}
+
 export const Increment = (id) => (dispatch) => {
     dispatch({type : ActionTypes.INCREMENT, payload : id})
 }

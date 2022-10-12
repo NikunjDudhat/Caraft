@@ -26,13 +26,14 @@ export const getOrder = () => async (dispatch) => {
 }
 
 export const postOrder = (data) => async (dispatch) => {
+    console.log("data", data);
     try {
         dispatch(loadingMedicines())
         
 
         const docRef = await addDoc(collection(db, "Order"), {
-            Order: data.cartDetails,
-            User: data.userDetails,
+            Order: data.cartData,
+            User: data.values,
         });
 
         dispatch({type : ActionTypes.POST_ORDER, payload : docRef})
