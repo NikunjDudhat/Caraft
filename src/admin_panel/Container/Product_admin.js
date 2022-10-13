@@ -53,6 +53,7 @@ function Product_admin(props) {
 
     const handleClose = () => {
         setOpen(false);
+        setUdata(false);
         formik.resetForm();
     };
 
@@ -68,6 +69,7 @@ function Product_admin(props) {
             ...params.row,
             url: params.row.url,
         })
+        // formik.setFieldValue("product_list", params.row.product_list)
 
         setDid(params.id);
         setUdata(true);
@@ -143,7 +145,6 @@ function Product_admin(props) {
             renderCell: (params) => (
 
                 categoryData.map((d) => {
-                    // console.log("paramsssss", params.formattedValue);
                     setCategoryID(params.formattedValue);
                     if (d.id === params.formattedValue) {
                         return <div>{d.category_name}</div>
@@ -197,7 +198,7 @@ function Product_admin(props) {
             <Dialog open={open} onClose={handleClose}>
                 <Formik value={formik}>
                     <Form key={formik} onSubmit={formik.handleSubmit}>
-                        <DialogTitle>Add Category</DialogTitle>
+                        <DialogTitle>Add Product</DialogTitle>
                         <DialogContent>
                             <TextField
                                 autoFocus
@@ -210,6 +211,7 @@ function Product_admin(props) {
                                 fullWidth
                                 variant="standard"
                                 onChange={formik.handleChange}
+                                className="inputBox"
                             />
                             {
                                 formik.errors.product_name ?
@@ -226,6 +228,7 @@ function Product_admin(props) {
                                 fullWidth
                                 variant="standard"
                                 onChange={formik.handleChange}
+                                className="inputBox"
                             />
                             {
                                 formik.errors.product_price ?
@@ -235,21 +238,14 @@ function Product_admin(props) {
                                 <InputLabel id="demo-simple-select-label">Catagory Type</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    label="Age"
+                                    id="product_list"
+                                    label="product_list"
+                                    key="product_list"
                                     name="product_list"
                                     onChange={formik.handleChange}
+                                    value={formik.values.product_list}
+                                    className="inputBox"
                                 >
-                                    {/* {
-                                        categoryData.map((d) => {
-                                                if(Edit === true && d.id === categoryID){
-                                                    <MenuItem defaultValue={d.category_name}>{d.category_name}</MenuItem>
-                                                    console.log("Gooddddd", d.category_name);
-                                                } else{
-                                                    console.log("Error");
-                                                }
-                                        })
-                                    } */}
 
                                     {
                                     categoryData.map((d) => (
@@ -272,6 +268,7 @@ function Product_admin(props) {
                                 fullWidth
                                 variant="standard"
                                 onChange={e => formik.setFieldValue('url', e.target.files[0])}
+                                className="inputBox"
                             />
                             {
                                 formik.errors.url ?
@@ -288,6 +285,7 @@ function Product_admin(props) {
                                 fullWidth
                                 variant="standard"
                                 onChange={formik.handleChange}
+                                className="inputBox"
                             />
                             {
                                 formik.errors.product_description ?
@@ -296,7 +294,7 @@ function Product_admin(props) {
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose}>Cancel</Button>
-                            <Button type='submit'>Add</Button>
+                            <Button type='submit'>{udata ? "Save" : "Add"}</Button>
                         </DialogActions>
                     </Form>
                 </Formik>

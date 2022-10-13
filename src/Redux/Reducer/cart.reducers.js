@@ -29,6 +29,13 @@ export const CartReducers = (state = initalState, action) => {
                 isLoding : false,
                 error : ''
             }
+        case ActionTypes.BUY_NOW : 
+            return {
+                ...state,
+                isLoding : false,
+                cart: state.cart.concat(action.payload),
+                error : ''
+            }
         case ActionTypes.EMPTY_CART : 
             return {
                 ...state,

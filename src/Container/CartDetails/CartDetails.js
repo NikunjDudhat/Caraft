@@ -9,6 +9,7 @@ import { Button, Form } from 'reactstrap';
 import { Formik, useFormik } from 'formik';
 import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { postOrder } from '../../Redux/Action/order.action';
+import { toast } from 'react-toastify';
 
 
 function CartDetails(props) {
@@ -25,7 +26,7 @@ function CartDetails(props) {
 
     let schema = yup.object().shape({
         email: yup.string().required("Please Enter Email"),
-        name: yup.string().required("Please Enter Name").matches(/[abcdefghijklmnopqrstuvwxyz]+/ , 'Is not in correct format'),
+        name: yup.string().required("Please Enter Name").matches(/[abcdefghijklmnopqrstuvwxyz]+/, 'Is not in correct format'),
         phone: yup.string().required("Please Enter phone").max(10, 'please enter maximum 10 numbers '),
         address: yup.string().required("Please Enter addres"),
     });
@@ -42,12 +43,12 @@ function CartDetails(props) {
             let data = {
                 values, cartData
             }
-
             dispatch(postOrder(data));
             history.push("/");
             resetForm();
+            toast.success("Your Order Successfully submit.")
             dispatch(EmptyAction());            
-            
+
         },
     });
 
@@ -97,12 +98,11 @@ function CartDetails(props) {
     }
 
     return (
-
         <div className='product_details Cart_Details'>
             <div className='container'>
                 <div className="row">
                     <div className='col-lg-9'>
-                        { placeOrder ?
+                        {placeOrder ?
                             <Formik value={formik}>
                                 <Form key={formik} onSubmit={formik.handleSubmit}>
                                     <DialogTitle>Place Order</DialogTitle>
@@ -203,21 +203,21 @@ function CartDetails(props) {
                                     <Link to={"/Category"} className='addItem'>Add Item</Link>
                                     <button className='addItem PlaceOrder' onClick={handelOrder}>Place Order</button>
                                 </div>
-                            </div> 
+                            </div>
                         }
                     </div>
                     <div className='col-lg-3'>
                         <div className='Price_Details'>
-                        <h2 className="title">Price Details</h2>
-                        <div className='details'>
-                            <p>Price ({cartData.length} item) <span>₹{TotalAmount}</span></p>
-                            <p>Discount<span>- ₹{Discount}</span></p>
+                            <h2 className="title">Price Details</h2>
+                            <div className='details'>
+                                <p>Price ({cartData.length} item) <span>₹{TotalAmount}</span></p>
+                                <p>Discount<span>- ₹{Discount}</span></p>
+                            </div>
+                            <div className='amount'>
+                                <p>Total Amount <b><span>₹{FinalAmount}</span></b></p>
+                            </div>
+                            <p className='save'>You will save ₹{Discount} on this order</p>
                         </div>
-                        <div className='amount'>
-                            <p>Total Amount <b><span>₹{FinalAmount}</span></b></p>
-                        </div>
-                        <p className='save'>You will save ₹{Discount} on this order</p>
-                    </div>
                     </div>
 
                 </div>

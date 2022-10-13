@@ -1216,3 +1216,7 @@ label {
     right: -15px;
     top: -5px;
 }
+
+.inputBox{
+    margin: 0 0 15px !important;
+}

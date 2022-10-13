@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import BoltIcon from '@mui/icons-material/Bolt';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddcartAction } from '../../Redux/Action/cart.action';
+import { AddcartAction, BuyAction } from '../../Redux/Action/cart.action';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function ProductDetails(props) {
@@ -21,7 +21,14 @@ function ProductDetails(props) {
         history.push(`/CartDetails`)
     }
 
-
+    const hendleBuy = (r) => {
+        const CartData = {
+            id: r,
+            quantity: quantity
+        }
+        dispatch(BuyAction(CartData))
+        history.push(`/CartDetails`, props.placeOrder = true)
+    }
 
 
 
@@ -38,7 +45,7 @@ function ProductDetails(props) {
                                     </div>
                                     <div className='addcart'>
                                         <button className='btn' onClick={() => hendleCart(p.id)}><ShoppingCartIcon /> Add to cart</button>
-                                        <button className='btn'><BoltIcon /> Buy now</button>
+                                        <button className='btn' onClick={() => hendleBuy(p.id)}><BoltIcon /> Buy now</button>
                                     </div>
                                 </div>
                                 <div className="col-lg-6 col-sm-12">

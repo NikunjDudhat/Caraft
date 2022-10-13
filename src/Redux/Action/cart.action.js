@@ -4,6 +4,10 @@ export const AddcartAction = (data) => (dispatch) => {
     dispatch({ type: ActionTypes.ADD_CART, payload : data })
 }
 
+export const BuyAction = (data) => (dispatch) => {
+    dispatch({ type: ActionTypes.BUY_NOW, payload : data })
+}
+
 
 export const GetcartAction = () => (dispatch) => {
     dispatch({ type: ActionTypes.GET_CART })
