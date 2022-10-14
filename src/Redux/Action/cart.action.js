@@ -5,6 +5,7 @@ export const AddcartAction = (data) => (dispatch) => {
 }
 
 export const BuyAction = (data) => (dispatch) => {
+    console.log("Dataaaaaaa", data);
     dispatch({ type: ActionTypes.BUY_NOW, payload : data })
 }
 
@@ -20,6 +21,10 @@ export const DeletecartAction = (data) => (dispatch) => {
 
 export const EmptyAction = () => (dispatch) => {
     dispatch({ type: ActionTypes.EMPTY_CART })
+}
+
+export const BuyEmptyAction = () => (dispatch) => {
+    dispatch({ type: ActionTypes.BUYEMPTY_CART })
 }
 
 export const Increment = (id) => (dispatch) => {

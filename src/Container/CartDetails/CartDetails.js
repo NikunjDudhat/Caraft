@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddcartAction, Decrement, DeletecartAction, EmptyAction, Increment } from '../../Redux/Action/cart.action';
+import { AddcartAction, BuyEmptyAction, Decrement, DeletecartAction, EmptyAction, Increment } from '../../Redux/Action/cart.action';
 import { getproduct } from '../../Redux/Action/product.action';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import * as yup from 'yup';
@@ -22,7 +22,9 @@ function CartDetails(props) {
     const cartProductsData = cartProducts.cart;
     const [placeOrder, setPlaceOrder] = useState(false);
     const cartData = [];
+    const BuyData = [];
     let Total;
+    // props.location.state.search
 
     let schema = yup.object().shape({
         email: yup.string().required("Please Enter Email"),
@@ -30,6 +32,12 @@ function CartDetails(props) {
         phone: yup.string().required("Please Enter phone").max(10, 'please enter maximum 10 numbers '),
         address: yup.string().required("Please Enter addres"),
     });
+
+    useEffect(() => {
+        if(props?.location?.state?.search === "Buy"){
+            setPlaceOrder(true);
+        }
+    },[props?.location?.state?.search])
 
     const formik = useFormik({
         initialValues: {
@@ -40,17 +48,40 @@ function CartDetails(props) {
         },
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
-            let data = {
-                values, cartData
+            if(props?.location?.state.search === "Buy"){
+                console.log("Good");
+                let data = {
+                    values, BuyData
+                }
+                console.log("Data", data);
+                dispatch(postOrder(data));
+                // history.push("/");
+                resetForm();
+                // toast.success("Your Order Successfully submit.")
+                dispatch(BuyEmptyAction());   
+            }else{
+                console.log("Error");
+                let data = {
+                    values, cartData
+                }
+                dispatch(postOrder(data));
+                history.push("/");
+                resetForm();
+                toast.success("Your Order Successfully submit.")
+                dispatch(EmptyAction());            
             }
-            dispatch(postOrder(data));
-            history.push("/");
-            resetForm();
-            toast.success("Your Order Successfully submit.")
-            dispatch(EmptyAction());            
-
         },
     });
+
+    productsData.map((p) => {
+        if (p.id === props?.location?.state?.id) {
+            let DataBuy = {
+                ...p,
+                quantity: props.location.state.quantity
+            }
+            BuyData.push(DataBuy);
+        }
+    })
 
     productsData.map((p) => {
         cartProductsData.map((c) => {
@@ -63,8 +94,6 @@ function CartDetails(props) {
             }
         })
     })
-
-    console.log("cartData", cartData);
 
     let TotalAmount = 0;
     cartData.map((c) => {
@@ -94,7 +123,14 @@ function CartDetails(props) {
 
     const handelOrder = () => {
         setPlaceOrder(true);
-        console.log("handelOrder", cartData);
+    }
+
+    const cartProductsDD = useSelector(state => state.cart);
+    console.log("cartProductsDD", cartProductsDD);
+    console.log("BuyData", BuyData);
+
+    const handleClick = () => {
+        dispatch(BuyEmptyAction());
     }
 
     return (
@@ -205,6 +241,7 @@ function CartDetails(props) {
                                 </div>
                             </div>
                         }
+                        <button onClick={() => handleClick()}>DDD</button>
                     </div>
                     <div className='col-lg-3'>
                         <div className='Price_Details'>

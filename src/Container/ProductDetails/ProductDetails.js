@@ -22,12 +22,13 @@ function ProductDetails(props) {
     }
 
     const hendleBuy = (r) => {
-        const CartData = {
+        const BuyCartData = {
             id: r,
-            quantity: quantity
+            quantity: quantity,
+            search: 'Buy',
         }
-        dispatch(BuyAction(CartData))
-        history.push(`/CartDetails`, props.placeOrder = true)
+        dispatch(BuyAction(BuyCartData))
+        history.push(`/CartDetails`, BuyCartData)  // props.location.state
     }
 
 

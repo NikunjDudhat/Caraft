@@ -21,6 +21,7 @@ export const ADD_CART = "ADD_CART"
 export const GET_CART = "GET_CART"
 export const DELETE_CART = "DELETE_CART"
 export const EMPTY_CART = "EMPTY_CART"
+export const BUYEMPTY_CART = "BUYEMPTY_CART"
 export const BUY_NOW = "BUY_NOW"
 
 
