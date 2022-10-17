@@ -3,7 +3,6 @@ import * as ActionTypes from '../ActionType'
 const initalState = {
     isLoding : false,
     cart : [],
-    buy : [],
     error: ''
 }
 
@@ -28,20 +27,6 @@ export const CartReducers = (state = initalState, action) => {
             return {
                 ...state,
                 isLoding : false,
-                error : ''
-            }
-        case ActionTypes.BUY_NOW :
-            console.log(action.payload.id);
-            const BData = state.buy.find((c) => c.id === action.payload.id );
-                if(BData){
-                    console.log("AAAAAAAAAAAAAAA");
-                } else{
-                    state.buy.push(action.payload)
-                }
-            return {
-                ...state,
-                isLoding : false,
-                // buy: state.buy.concat(action.payload),
                 error : ''
             }
         case ActionTypes.EMPTY_CART : 

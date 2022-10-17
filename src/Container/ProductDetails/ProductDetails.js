@@ -27,7 +27,6 @@ function ProductDetails(props) {
             quantity: quantity,
             search: 'Buy',
         }
-        dispatch(BuyAction(BuyCartData))
         history.push(`/CartDetails`, BuyCartData)  // props.location.state
     }
 

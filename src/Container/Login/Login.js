@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Form, Formik, useFormik } from 'formik';
 import { Button, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
+import { GoogleUser, LoginUser, ResetPassword, SignUpUser } from '../../Redux/Action/auth.action';
+import { useDispatch } from 'react-redux';
 
 function Login(props) {
 
     const [userType, setUserType] = useState("Login");
+    const dispatch = useDispatch();
+
 
     let Login = {
         email: yup.string().email("please enter valid email").required("please enter email"),
@@ -13,7 +17,6 @@ function Login(props) {
     }
 
     let SignUp = {
-        name: yup.string().required("please Enter Name"),
         email: yup.string().email("please enter valid email").required("please enter email"),
         password: yup.string().required("please enter Password"),
     }
@@ -35,7 +38,6 @@ function Login(props) {
     } else if (userType === "SignUp") {
         schema = yup.object().shape(SignUp);
         initiValue = {
-            name: '',
             email: "",
             password: ""
         }
@@ -49,21 +51,34 @@ function Login(props) {
     const formik = useFormik({
         initialValues: initiValue,
         validationSchema: schema,
-        onSubmit: values => {
+        onSubmit: (values, {resetForm}) => {
             // alert(JSON.stringify(values, null, 2));
-
             if (userType === "Login") {
-                console.log("Successfully Login 👍");
+                handleLogin(values);
             } else if (userType === "SignUp") {
-                console.log("Successfully SignUp 👍");
+                handleSignUp(values);
             } else if (userType === "forgotPass") {
-                console.log("Successfully Forget Passowrd 👍");
+                dispatch(ResetPassword(values))
             }
-            // resetForm()
+            resetForm();
         },
     });
 
-    console.log(formik.errors.email);
+    const handleLogin = (v) => {
+        console.log("vvvvvvv", v);
+        // sessionStorage.setItem("user", "123");
+        dispatch(LoginUser(v));
+    }
+
+    const handleSignUp = (value) => {
+        dispatch(SignUpUser(value));
+    }
+
+    // const GoogleLogin = () => {
+    //     dispatch(GoogleUser())
+    // }
+
+    console.log(formik.errors);
 
     return (
         <div className="contact_section layout_padding">
@@ -92,25 +107,6 @@ function Login(props) {
                                                     name="email"
                                                     placeholder="with a placeholder"
                                                     type="email"
-                                                    onChange={formik.handleChange}
-                                                />
-                                                {
-                                                    formik.errors.email ?
-                                                        <p className='error'>{formik.errors.email}</p> : null
-                                                }
-                                            </FormGroup> : null
-                                    }
-                                    {
-                                        userType === "SignUp" ?
-                                            <FormGroup>
-                                                <Label for="examplesignUp">
-                                                    Name
-                                                </Label>
-                                                <Input
-                                                    id="examplesignUp"
-                                                    name="name"
-                                                    placeholder="with a placeholder"
-                                                    type="text"
                                                     onChange={formik.handleChange}
                                                 />
                                                 {

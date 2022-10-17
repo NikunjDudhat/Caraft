@@ -48,16 +48,15 @@ function CartDetails(props) {
         },
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
-            if(props?.location?.state.search === "Buy"){
+            if(props?.location?.state?.search === "Buy"){
                 console.log("Good");
                 let data = {
-                    values, BuyData
+                    values, cartData
                 }
-                console.log("Data", data);
                 dispatch(postOrder(data));
-                // history.push("/");
+                history.push("/");
                 resetForm();
-                // toast.success("Your Order Successfully submit.")
+                toast.success("Your Order Successfully submit.")
                 dispatch(BuyEmptyAction());   
             }else{
                 console.log("Error");
@@ -101,6 +100,11 @@ function CartDetails(props) {
         TotalAmount = TotalAmount + Total;
     })
 
+    BuyData.map((c) => {
+        Total = c.product_price * c.quantity;
+        TotalAmount = TotalAmount + Total;
+    })
+
     const Discount = Math.round(TotalAmount * 0.05);
     const FinalAmount = TotalAmount - Discount;
 
@@ -126,12 +130,6 @@ function CartDetails(props) {
     }
 
     const cartProductsDD = useSelector(state => state.cart);
-    console.log("cartProductsDD", cartProductsDD);
-    console.log("BuyData", BuyData);
-
-    const handleClick = () => {
-        dispatch(BuyEmptyAction());
-    }
 
     return (
         <div className='product_details Cart_Details'>
@@ -241,22 +239,35 @@ function CartDetails(props) {
                                 </div>
                             </div>
                         }
-                        <button onClick={() => handleClick()}>DDD</button>
                     </div>
-                    <div className='col-lg-3'>
-                        <div className='Price_Details'>
-                            <h2 className="title">Price Details</h2>
-                            <div className='details'>
-                                <p>Price ({cartData.length} item) <span>₹{TotalAmount}</span></p>
-                                <p>Discount<span>- ₹{Discount}</span></p>
+                    {props?.location?.state?.search === "Buy" ? 
+                        <div className='col-lg-3'>
+                            <div className='Price_Details'>
+                                <h2 className="title">Price Details</h2>
+                                <div className='details'>
+                                    <p>Price ({BuyData.length} item) <span>₹{TotalAmount}</span></p>
+                                    <p>Discount<span>- ₹{Discount}</span></p>
+                                </div>
+                                <div className='amount'>
+                                    <p>Total Amount <b><span>₹{FinalAmount}</span></b></p>
+                                </div>
+                                <p className='save'>You will save ₹{Discount} on this order</p>
                             </div>
-                            <div className='amount'>
-                                <p>Total Amount <b><span>₹{FinalAmount}</span></b></p>
+                        </div> :
+                        <div className='col-lg-3'>
+                            <div className='Price_Details'>
+                                <h2 className="title">Price Details</h2>
+                                <div className='details'>
+                                    <p>Price ({cartData.length} item) <span>₹{TotalAmount}</span></p>
+                                    <p>Discount<span>- ₹{Discount}</span></p>
+                                </div>
+                                <div className='amount'>
+                                    <p>Total Amount <b><span>₹{FinalAmount}</span></b></p>
+                                </div>
+                                <p className='save'>You will save ₹{Discount} on this order</p>
                             </div>
-                            <p className='save'>You will save ₹{Discount} on this order</p>
                         </div>
-                    </div>
-
+                    }
                 </div>
             </div>
         </div>

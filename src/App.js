@@ -12,22 +12,21 @@ import Login from './Container/Login/Login';
 import Categ_admin from './admin_panel/Container/Categ_admin';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { countorStore } from './Redux/Store';
+import { persistor, store } from './Redux/Store';
 import Product_admin from './admin_panel/Container/Product_admin';
 import ProductDetails from './Container/ProductDetails/ProductDetails';
 import CartDetails from './Container/CartDetails/CartDetails';
 import OrderAdmin from './admin_panel/Container/Order_admin';
 import 'react-toastify/dist/ReactToastify.css';
 import ToastContainerCompnent from './Components/ToastContainer/ToastContainerCompnent';
+import { SnackbarProvider } from 'notistack';
 
 
 function App() {
 
-  const {store, persistor} = countorStore();
-
-
   return (
     <>
+    <SnackbarProvider maxSnack={3}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
       <Header/>
@@ -50,6 +49,7 @@ function App() {
       </PersistGate>
       </Provider>
       <ToastContainerCompnent /> 
+      </SnackbarProvider>
     </>
   );
 }
