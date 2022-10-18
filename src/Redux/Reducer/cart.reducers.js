@@ -3,6 +3,7 @@ import * as ActionTypes from '../ActionType'
 const initalState = {
     isLoding : false,
     cart : [],
+    buy: [],
     error: ''
 }
 

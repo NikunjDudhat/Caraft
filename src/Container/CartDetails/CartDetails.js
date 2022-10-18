@@ -24,6 +24,9 @@ function CartDetails(props) {
     const cartData = [];
     const BuyData = [];
     let Total;
+    let BTotal;
+    const auth = useSelector(state => state.auth);
+    console.log("auth", auth);
     // props.location.state.search
 
     let schema = yup.object().shape({
@@ -35,7 +38,7 @@ function CartDetails(props) {
 
     useEffect(() => {
         if(props?.location?.state?.search === "Buy"){
-            setPlaceOrder(true);
+            auth.user !== null ? setPlaceOrder(true) : history.push('/login');
         }
     },[props?.location?.state?.search])
 
@@ -95,18 +98,24 @@ function CartDetails(props) {
     })
 
     let TotalAmount = 0;
+    let TotalBAmount = 0;
     cartData.map((c) => {
         Total = c.product_price * c.quantity;
         TotalAmount = TotalAmount + Total;
     })
 
     BuyData.map((c) => {
-        Total = c.product_price * c.quantity;
-        TotalAmount = TotalAmount + Total;
+        BTotal = c.product_price * c.quantity;
+        TotalBAmount = TotalBAmount + BTotal;
     })
+
+    console.log("BuyData", BuyData);
 
     const Discount = Math.round(TotalAmount * 0.05);
     const FinalAmount = TotalAmount - Discount;
+
+    const BDiscount = Math.round(TotalBAmount * 0.05);
+    const BFinalAmount = TotalBAmount - BDiscount;
 
     const handleIncrement = (id) => {
         dispatch(Increment(id))
@@ -126,10 +135,12 @@ function CartDetails(props) {
     }
 
     const handelOrder = () => {
-        setPlaceOrder(true);
+        auth.user !== null ? setPlaceOrder(true) : history.push('/login');
     }
 
     const cartProductsDD = useSelector(state => state.cart);
+
+   
 
     return (
         <div className='product_details Cart_Details'>
@@ -245,13 +256,13 @@ function CartDetails(props) {
                             <div className='Price_Details'>
                                 <h2 className="title">Price Details</h2>
                                 <div className='details'>
-                                    <p>Price ({BuyData.length} item) <span>₹{TotalAmount}</span></p>
-                                    <p>Discount<span>- ₹{Discount}</span></p>
+                                    <p>Price ({BuyData.length} item) <span>₹{TotalBAmount}</span></p>
+                                    <p>Discount<span>- ₹{BDiscount}</span></p>
                                 </div>
                                 <div className='amount'>
-                                    <p>Total Amount <b><span>₹{FinalAmount}</span></b></p>
+                                    <p>Total Amount <b><span>₹{BFinalAmount}</span></b></p>
                                 </div>
-                                <p className='save'>You will save ₹{Discount} on this order</p>
+                                <p className='save'>You will save ₹{BDiscount} on this order</p>
                             </div>
                         </div> :
                         <div className='col-lg-3'>
