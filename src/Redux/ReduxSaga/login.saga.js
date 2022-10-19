@@ -20,10 +20,10 @@ function* signUpsaga(action) {
 
 function* loginsaga(action) {
    try {
-      const user = yield call(LoginApi, action.payload); 
+      const user = yield call(LoginApi, action.payload);
       history.push('/');
       yield put(setAlert({text: "Login Successfully", color: "success"}))
-      yield put(LogginUser(user.user));
+      yield put(LogginUser(user.payload));
    } catch (e){
       yield put(setAlert({text: e.payload, color: "error"}))
    }

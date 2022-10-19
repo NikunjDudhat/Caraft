@@ -7,8 +7,6 @@ import Header from '../Components/Header/Header';
 
 function ClientRoute({ component: component, ...rest }) {
     const auth = useSelector(state => state.auth);
-
-    console.log("auth", auth);
     return (
         <Route {...rest} render={props => (
             auth.user !== null ?

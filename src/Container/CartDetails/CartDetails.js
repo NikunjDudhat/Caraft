@@ -26,7 +26,6 @@ function CartDetails(props) {
     let Total;
     let BTotal;
     const auth = useSelector(state => state.auth);
-    console.log("auth", auth);
     // props.location.state.search
 
     let schema = yup.object().shape({
@@ -52,7 +51,6 @@ function CartDetails(props) {
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
             if(props?.location?.state?.search === "Buy"){
-                console.log("Good");
                 let data = {
                     values, cartData
                 }
@@ -62,7 +60,6 @@ function CartDetails(props) {
                 toast.success("Your Order Successfully submit.")
                 dispatch(BuyEmptyAction());   
             }else{
-                console.log("Error");
                 let data = {
                     values, cartData
                 }
@@ -108,8 +105,6 @@ function CartDetails(props) {
         BTotal = c.product_price * c.quantity;
         TotalBAmount = TotalBAmount + BTotal;
     })
-
-    console.log("BuyData", BuyData);
 
     const Discount = Math.round(TotalAmount * 0.05);
     const FinalAmount = TotalAmount - Discount;

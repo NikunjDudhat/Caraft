@@ -65,7 +65,6 @@ function Login(props) {
     });
 
     const handleLogin = (v) => {
-        console.log("vvvvvvv", v);
         // sessionStorage.setItem("user", "123");
         dispatch(LoginUser(v));
     }
@@ -77,8 +76,6 @@ function Login(props) {
     // const GoogleLogin = () => {
     //     dispatch(GoogleUser())
     // }
-
-    console.log(formik.errors);
 
     return (
         <div className="contact_section layout_padding">

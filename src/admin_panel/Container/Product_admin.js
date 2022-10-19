@@ -30,9 +30,6 @@ function Product_admin(props) {
     const categoryData = doctor.doctor;
     const [categoryID, setCategoryID] = useState('');
     const [Edit, setEdit] = useState(false);
-
-
-    console.log("categoryID", categoryID);
     // const cateID = () => {
 
     // }

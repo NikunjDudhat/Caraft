@@ -9,7 +9,6 @@ const initalState = {
 
 
 export const CartReducers = (state = initalState, action) => {
-    console.log(action.payload, action.type);
     switch (action.type) {
         case ActionTypes.ADD_CART :
             const Data = state.cart.find((c) => c.id === action.payload.id );
